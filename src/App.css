@@ -31,3 +31,22 @@
   border-color: #4f46e5;
   background-color: #f5f3ff;
 }
+
+.smoke path {
+  animation: drift 3s infinite ease-in-out;
+}
+
+@keyframes drift {
+  0% {
+    transform: translateX(0) translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateX(2px) translateY(-2px);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+    opacity: 0.6;
+  }
+}
