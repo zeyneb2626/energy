@@ -1,36 +1,39 @@
 import React from 'react';
 import { EnergyRating } from '../types';
-import { energyRatings } from '../data/energyRatings';
 
 interface EnergyRatingScaleProps {
   currentRating: EnergyRating;
 }
 
 const EnergyRatingScale: React.FC<EnergyRatingScaleProps> = ({ currentRating }) => {
+  const ratings = [
+    { id: 'A+', range: '≤ 50', color: '#1B5E20' },
+    { id: 'A', range: '51 à 90', color: '#2E7D32' },
+    { id: 'B', range: '91 à 150', color: '#388E3C' },
+    { id: 'C', range: '151 à 230', color: '#8BC34A' },
+    { id: 'D', range: '231 à 330', color: '#FFEB3B', darkText: true },
+    { id: 'E', range: '331 à 450', color: '#FFC107', darkText: true },
+    { id: 'F', range: '451 à 590', color: '#FF9800' },
+    { id: 'G', range: '> 590', color: '#F44336' }
+  ];
+
   return (
-    <div className="w-full">
-      {energyRatings.map((rating) => (
-        <div 
-          key={rating.id} 
-          className={`flex items-center mb-1 ${currentRating === rating.id ? 'scale-105 transform' : ''}`}
-          style={{ transition: 'transform 0.3s ease' }}
+    <div className="flex flex-col gap-1 w-full max-w-[280px]">
+      {ratings.map((rating) => (
+        <div
+          key={rating.id}
+          className={`
+            flex items-center h-8 px-3 rounded-l-md transition-all duration-300 ease-in-out
+            ${currentRating === rating.id ? 'w-full translate-x-2' : 'w-[85%]'}
+            ${rating.darkText ? 'text-gray-800' : 'text-white'}
+          `}
+          style={{ backgroundColor: rating.color }}
         >
-          <div 
-            className="w-full h-8 flex items-center px-3 text-white font-medium rounded-r-full transition-all duration-300"
-            style={{ 
-              backgroundColor: rating.color,
-              width: `${rating.id === currentRating ? '100%' : '85%'}`,
-              transform: `translateX(${rating.id === currentRating ? '10px' : '0'})`,
-              transition: 'all 0.3s ease-in-out'
-            }}
-          >
-            <span className="mr-2">{rating.id}</span>
-            {rating.range && <span className="text-sm">{rating.range}</span>}
-          </div>
+          <span className="font-semibold min-w-[25px] mr-3">{rating.id}</span>
+          <span className="text-sm opacity-90">{rating.range}</span>
         </div>
       ))}
-
-      <div className="flex justify-between text-xs text-gray-500 mt-2">
+      <div className="flex justify-between text-xs text-gray-500 mt-1">
         <span>Très performant</span>
         <span>Peu performant</span>
       </div>
@@ -38,4 +41,4 @@ const EnergyRatingScale: React.FC<EnergyRatingScaleProps> = ({ currentRating }) 
   );
 };
 
-export default EnergyRatingScale
+export default EnergyRatingScale;
