@@ -299,10 +299,34 @@
                 </linearGradient>
               </defs>
               
-              <path class="ground"
-                d="M0,140 H200"
-                stroke="#2E7D32"
-                strokeWidth="2"/>
+              <!-- Arbres améliorés -->
+              <g transform="translate(20, 140)">
+                <path d="M0,0 C-2,-15 -1,-25 0,-30 C1,-25 2,-15 0,0" 
+                      fill="#795548"/>
+                <path d="M0,-15 C-5,-20 -8,-25 -5,-30 C-3,-32 3,-32 5,-30 C8,-25 5,-20 0,-15" 
+                      fill="#2E7D32"/>
+                <path d="M0,-20 C-4,-25 -6,-30 -3,-35 C-1,-37 1,-37 3,-35 C6,-30 4,-25 0,-20" 
+                      fill="#388E3C"/>
+              </g>
+              <g transform="translate(180, 140)">
+                <path d="M0,0 C2,-15 1,-25 0,-30 C-1,-25 -2,-15 0,0" 
+                      fill="#795548"/>
+                <path d="M0,-15 C5,-20 8,-25 5,-30 C3,-32 -3,-32 -5,-30 C-8,-25 -5,-20 0,-15" 
+                      fill="#2E7D32"/>
+                <path d="M0,-20 C4,-25 6,-30 3,-35 C1,-37 -1,-37 -3,-35 C-6,-30 -4,-25 0,-20" 
+                      fill="#388E3C"/>
+              </g>
+              
+              <!-- Sol avec herbe détaillée -->
+              <path d="M0,140 H200" stroke="#2E7D32" stroke-width="2"/>
+              {[...Array(20)].map((_, i) => (
+                <g key={i} transform={`translate(${i * 10}, 140)`}>
+                  <path d={`M0,0 C1,-2 2,-3 1,-4 M0,0 C-1,-2 0,-3 1,-3 M0,0 C0,-2 1,-3 0,-4`}
+                        stroke="#4CAF50" 
+                        stroke-width="0.5"
+                        stroke-linecap="round"/>
+                </g>
+              ))}
               
               <path class="house-body"
                 d="M40,140 
@@ -397,7 +421,7 @@
         </div>
         <div class="energy-line">
           <span>Classe :</span>
-          <span id="energy-class">–</span>
+          <span id="energy-class">B</span>
         </div>
         <div class="energy-bar">
           <div id="energy-bar-fill"></div>
