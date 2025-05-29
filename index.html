@@ -219,29 +219,18 @@
       background: #f8fafc;
       border-radius: 8px;
       padding: 1.5rem;
-      margin: 1rem 0 2rem;
+      margin-bottom: 2rem;
       border: 1px solid #e2e8f0;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
-
-    .price-total {
-      font-size: 2rem;
-      font-weight: bold;
-      color: #1a202c;
-      margin-bottom: 1rem;
     }
 
     .price-breakdown {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      font-size: 0.9rem;
+      margin-top: 1rem;
     }
 
     .price-item {
       display: flex;
       justify-content: space-between;
-      padding: 0.25rem 0;
+      padding: 0.5rem 0;
       border-bottom: 1px solid #e2e8f0;
     }
 
@@ -303,6 +292,7 @@
     .action-buttons {
       display: flex;
       gap: .75rem;
+      margin-top: 2rem;
     }
 
     .action-buttons button {
@@ -452,16 +442,6 @@
 
     <div class="controls">
       <h2>Configuration Modern'home</h2>
-
-      <div class="price-display">
-        <div class="price-total" id="total-price">170 000 €</div>
-        <div class="price-breakdown" id="price-breakdown">
-          <div class="price-item">
-            <span class="price-label">Prix de base</span>
-            <span class="price-value">170 000 €</span>
-          </div>
-        </div>
-      </div>
 
       <div class="group" data-cat="Menuiserie">
         <h3>Menuiserie ALU</h3>
@@ -711,9 +691,6 @@
               sw.classList.add('selected');
               selection[cat] = +sw.dataset.cost;
               const tot = Object.values(selection).reduce((a,b) => a+b, 0);
-              const totalPrice = `${(basePrice+tot).toLocaleString('fr-FR')} €`;
-              totalEl.textContent = totalPrice;
-              fixedPriceEl.textContent = totalPrice;
               updatePriceBreakdown();
               const rgba = hex2rgba(sw.dataset.color);
               mats.forEach(m => {
