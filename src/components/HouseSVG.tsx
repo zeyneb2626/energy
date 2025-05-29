@@ -15,43 +15,68 @@ const HouseSVG: React.FC<HouseSVGProps> = ({ rating }) => {
       xmlns="http://www.w3.org/2000/svg"
       className="w-full h-full"
     >
-      {/* House Silhouette */}
+      {/* House outline */}
       <path
-        d="M100,20 L30,80 L30,180 L80,180 L80,120 L120,120 L120,180 L170,180 L170,80 Z"
+        d="M40,100 
+           L100,40 
+           L160,100
+           L160,180 
+           L40,180 
+           L40,100 
+           Z"
+        fill="none"
         className="energy-rating-transition"
-        fill={color}
-        stroke="#333"
-        strokeWidth="2"
+        stroke={color}
+        strokeWidth="4"
       />
-      
-      {/* Door */}
-      <rect
-        x="90"
-        y="140"
-        width="20"
-        height="40"
-        fill="#5D4037"
+
+      {/* Chimney */}
+      <path
+        d="M130,60 
+           L130,40 
+           L145,40 
+           L145,70"
+        fill="none"
+        className="energy-rating-transition"
+        stroke={color}
+        strokeWidth="4"
       />
-      
+
+      {/* Door frame */}
+      <path
+        d="M85,180 
+           L85,130 
+           L115,130 
+           L115,180"
+        fill="none"
+        className="energy-rating-transition"
+        stroke={color}
+        strokeWidth="4"
+      />
+
       {/* Windows */}
-      <rect
-        x="50"
-        y="90"
-        width="20"
-        height="20"
-        fill="#E3F2FD"
-        stroke="#333"
-        strokeWidth="1"
+      <path
+        d="M60,120 
+           L60,140 
+           L80,140 
+           L80,120 
+           L60,120"
+        fill="none"
+        className="energy-rating-transition"
+        stroke={color}
+        strokeWidth="4"
       />
-      
-      <rect
-        x="130"
-        y="90"
-        width="20"
-        height="20"
-        fill="#E3F2FD"
-        stroke="#333"
-        strokeWidth="1"
+
+      <path
+        d="M120,120 
+           L120,140 
+           L140,140 
+           L140,120 
+           L120,120"
+        fill="none"
+        className="energy-rating-transition"
+        stroke={color}
+        strokeWidth="4"
       />
     </svg>
   );
