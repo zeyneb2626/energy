@@ -544,6 +544,16 @@
         </div>
       </div>
 
+      <div class="price-display">
+        <div class="price-total">Total TTC</div>
+        <div id="detailed-price-breakdown">
+          <div class="price-item">
+            <span class="price-label">Prix de base</span>
+            <span class="price-value">170 000 €</span>
+          </div>
+        </div>
+      </div>
+
       <div class="action-buttons">
         <button class="btn-save">Enregistrer la configuration</button>
         <button class="btn-quote">Demander un devis</button>
@@ -592,6 +602,7 @@
       const ratingBars = document.querySelectorAll('.rating-bar');
       const houseSvg = document.querySelector('.house-svg');
       const fixedPrice = document.getElementById('fixed-price');
+      const detailedPriceBreakdown = document.getElementById('detailed-price-breakdown');
       const basePrice = 170000;
       let selection = {};
 
@@ -653,8 +664,8 @@
       }
 
       function updatePriceBreakdown() {
-        const breakdown = document.getElementById('price-breakdown');
         const items = ['<div class="price-item"><span class="price-label">Prix de base</span><span class="price-value">170 000 €</span></div>'];
+        let totalOptions = 0;
         
         Object.entries(selection).forEach(([cat]) => {
           const sw = document.querySelector(`.group[data-cat="${cat}"] .swatch.selected`);
@@ -662,6 +673,7 @@
           const cost = +sw.dataset.cost;
           if(cost > 0) {
             const label = sw.nextElementSibling.textContent;
+            totalOptions += cost;
             items.push(`
               <div class="price-item">
                 <span class="price-label">${cat} - ${label}</span>
@@ -671,7 +683,19 @@
           }
         });
         
-        breakdown.innerHTML = items.join('');
+        items.push(`
+          <div class="price-item" style="margin-top: 1rem; border-top: 2px solid #e2e8f0; padding-top: 1rem;">
+            <span class="price-label">Total des options</span>
+            <span class="price-value">+${totalOptions.toLocaleString('fr-FR')} €</span>
+          </div>
+          <div class="price-item" style="font-weight: bold; font-size: 1.1em;">
+            <span class="price-label">Total TTC</span>
+            <span class="price-value">${(basePrice + totalOptions).toLocaleString('fr-FR')} €</span>
+          </div>
+        `);
+        
+        document.getElementById('price-breakdown').innerHTML = items.join('');
+        detailedPriceBreakdown.innerHTML = items.join('');
       }
 
       mv.addEventListener('load', () => {
