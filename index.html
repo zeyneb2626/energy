@@ -6,17 +6,60 @@
   <title>Configuration Tradi'home P4</title>
   <script type="module" src="https://unpkg.com/@google/model-viewer@1.12.0/dist/model-viewer.min.js"></script>
   <style>
-    /* Styles existants inchangés */
     * { box-sizing:border-box; margin:0; padding:0 }
     html, body { height:100%; font-family:sans-serif; background:#f0f2f5 }
-    
-    /* Mise à jour des styles pour l'affichage énergétique */
+    #configurator {
+      display:grid;
+      grid-template-columns:2fr 1fr;
+      height:100vh;
+      gap:1rem;
+      padding:1rem;
+    }
+    .viewer-card {
+      background:#fff;
+      border-radius:8px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.1);
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+      position: relative;
+      z-index: 1;
+    }
+    model-viewer {
+      flex:5;
+      width:100%; height:100%;
+      background:#dddddd;
+      pointer-events: all;
+      touch-action: none;
+    }
+
+    /* Panneau énergie */
+    #energy-summary { 
+      flex:2; 
+      background:#fff; 
+      border-top:1px solid #eee; 
+      overflow-y:auto; 
+      padding:1rem; 
+    }
+    #energy-summary h3 { 
+      font-size:1rem; 
+      color:#222; 
+      margin-bottom:1rem; 
+    }
+    #energy-visual { 
+      display:flex; 
+      align-items:flex-start; 
+      justify-content:center; 
+      gap:2rem; 
+      margin-bottom:1rem; 
+    }
+
+    /* Nouvelle échelle énergétique */
     .energy-rating-scale {
-      flex: 1;
       display: flex;
       flex-direction: column;
       gap: 4px;
-      max-width: 280px;
+      width: 280px;
     }
 
     .rating-bar {
@@ -27,9 +70,8 @@
       color: white;
       font-size: 14px;
       border-radius: 4px 0 0 4px;
-      transform-origin: left center;
       transition: all 0.3s ease;
-      width: 70%;
+      width: 85%;
     }
 
     .rating-bar.active {
@@ -37,18 +79,6 @@
       transform: translateX(10px);
     }
 
-    .rating-label {
-      font-weight: 600;
-      margin-right: 12px;
-      min-width: 25px;
-    }
-
-    .rating-value {
-      font-size: 13px;
-      opacity: 0.9;
-    }
-
-    /* Couleurs des niveaux énergétiques */
     .rating-A-plus { background-color: #1B5E20; }
     .rating-A { background-color: #2E7D32; }
     .rating-B { background-color: #388E3C; }
@@ -58,87 +88,379 @@
     .rating-F { background-color: #FF9800; }
     .rating-G { background-color: #F44336; }
 
-    /* Style pour la maison et son environnement */
-    .house-container {
-      position: relative;
+    /* Maison avec environnement */
+    .house-wrapper {
       width: 180px;
       height: 120px;
+      position: relative;
     }
 
-    .environment {
-      position: absolute;
+    .house-svg {
       width: 100%;
       height: 100%;
     }
 
-    .tree {
-      position: absolute;
-      bottom: 20px;
+    .energy-line { 
+      display:flex; 
+      justify-content:space-between; 
+      margin-bottom:.25rem; 
+    }
+    .energy-bar { 
+      width:100%; 
+      height:6px; 
+      background:#eee; 
+      border-radius:3px; 
+      overflow:hidden; 
+      margin-top:.5rem; 
+    }
+    #energy-bar-fill { 
+      height:100%; 
+      width:0; 
+      background:#4caf50; 
+      transition:width .5s; 
     }
 
-    .tree-left { left: 10px; }
-    .tree-right { right: 10px; }
-
-    .grass {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 20px;
+    /* Dimensions */
+    .dimensions {
+      flex:1; 
+      display:grid; 
+      grid-template-columns:repeat(3,1fr);
+      background:#fff; 
+      padding:1rem; 
+      border-top:1px solid #eee; 
+      gap:1rem;
+    }
+    .dim-card {
+      background:#fff; 
+      border:1px solid #eee; 
+      border-radius:6px; 
+      padding:.75rem;
+      text-align:center; 
+      box-shadow:0 1px 4px rgba(0,0,0,0.05);
+    }
+    .dim-card strong { 
+      display:block; 
+      font-size:1.25rem; 
+      color:#222 
+    }
+    .dim-card span { 
+      font-size:.85rem; 
+      color:#666 
     }
 
-    /* Reste des styles existants... */
-    [Reste du CSS existant...]
+    /* Contrôles */
+    .controls {
+      background:#fff; 
+      border-radius:8px; 
+      box-shadow:0 2px 8px rgba(0,0,0,0.1);
+      padding:1.5rem; 
+      overflow-y:auto;
+    }
+    .controls h2 { 
+      font-size:1.5rem; 
+      color:#222; 
+      margin-bottom:1rem; 
+    }
+    .group { 
+      margin-bottom:1.5rem 
+    }
+    .group h3 { 
+      font-size:1.1rem; 
+      color:#333; 
+      margin-bottom:.5rem; 
+    }
+    .options { 
+      display:flex; 
+      gap:.75rem; 
+      flex-wrap:wrap 
+    }
+    .option { 
+      text-align:center; 
+      width:70px 
+    }
+    .swatch {
+      width:100%; 
+      aspect-ratio:1; 
+      border:1px solid #ccc; 
+      border-radius:4px;
+      cursor:pointer; 
+      position:relative; 
+      transition:border-color .2s;
+    }
+    .swatch:hover { 
+      border-color:#999 
+    }
+    .swatch.selected { 
+      border-color:#006aff 
+    }
+    .swatch.selected::after {
+      content:'✔'; 
+      position:absolute; 
+      top:4px; 
+      right:6px; 
+      color:#006aff; 
+      font-size:1rem;
+    }
+    .option-label { 
+      margin-top:.3rem; 
+      font-size:.75rem; 
+      color:#444 
+    }
+    .option-price { 
+      font-size:.7rem; 
+      color:#666 
+    }
+
+    /* Prix */
+    #price-summary {
+      background:#fff; 
+      border:1px solid #eee; 
+      border-radius:6px;
+      padding:1rem; 
+      margin:1rem 0; 
+      box-shadow:0 1px 4px rgba(0,0,0,0.05);
+    }
+    #price-summary h3 { 
+      font-size:1rem; 
+      margin-bottom:.75rem; 
+      color:#222 
+    }
+    #price-summary .line {
+      display:flex; 
+      justify-content:space-between; 
+      margin-bottom:.5rem; 
+      font-size:.9rem; 
+      color:#333;
+    }
+    #price-summary .line.total { 
+      font-weight:700; 
+      font-size:1.1rem; 
+    }
+
+    .action-buttons { 
+      display:flex; 
+      gap:.75rem 
+    }
+    .action-buttons button {
+      flex:1; 
+      padding:.75rem; 
+      font-size:.95rem; 
+      border:none; 
+      border-radius:4px; 
+      cursor:pointer;
+    }
+    .btn-save { 
+      background:#f0f0f0; 
+      color:#333 
+    }
+    .btn-quote { 
+      background:#006aff; 
+      color:#fff 
+    }
+
+    @media (max-width:1024px){
+      #configurator{ 
+        grid-template-columns:1fr 
+      }
+      model-viewer{ 
+        height:50vh!important; 
+        min-height:300px 
+      }
+    }
+    @media (max-width:600px){
+      model-viewer{ 
+        height:40vh!important; 
+        min-height:200px 
+      }
+      .dimensions{
+        grid-template-columns:1fr
+      }
+    }
   </style>
 </head>
 <body>
-  [En-tête et structure principale existante...]
-  
-  <div id="energy-visual">
-    <div class="house-container">
-      <!-- Environnement -->
-      <svg class="environment" viewBox="0 0 200 140">
-        <!-- Arbres -->
-        <g class="tree tree-left">
-          <path d="M0,40 C-5,30 -8,20 0,0 C8,20 5,30 0,40" fill="#2E7D32"/>
-          <rect x="-2" y="40" width="4" height="10" fill="#795548"/>
-        </g>
-        <g class="tree tree-right" transform="translate(200,0)">
-          <path d="M0,40 C-5,30 -8,20 0,0 C8,20 5,30 0,40" fill="#2E7D32"/>
-          <rect x="-2" y="40" width="4" height="10" fill="#795548"/>
-        </g>
-        
-        <!-- Herbe -->
-        <g class="grass">
-          {[...Array(20)].map((_, i) => (
-            <path 
-              d={`M${i*10},20 C${i*10+2},15 ${i*10+4},10 ${i*10+5},5`} 
-              stroke="#4CAF50" 
-              strokeWidth="1"
-              fill="none"
-            />
-          ))}
-        </g>
-      </svg>
+  <div id="configurator">
+    <div class="viewer-card">
+      <model-viewer
+        id="mv"
+        src="./TRADIHOME17.glb"
+        alt="Maison Tradi'home"
+        exposure="0.6"
+        shadow-intensity="2.5"
+        shadow-softness="1"
+        camera-controls
+        min-camera-orbit="0deg 0deg auto"
+        max-camera-orbit="360deg 90deg auto">
+      </model-viewer>
 
-      <!-- Maison existante -->
-      [SVG de la maison existant...]
+      <div id="energy-summary">
+        <h3>Performance énergétique estimée</h3>
+        
+        <div id="energy-visual">
+          <div class="house-wrapper">
+            <svg viewBox="0 0 200 140" class="house-svg">
+              <!-- Arbres -->
+              <g transform="translate(20, 100)">
+                <path
+                  d="M0,0 C-8,-10 -12,-25 0,-40 C12,-25 8,-10 0,0"
+                  fill="#2E7D32"
+                />
+                <rect x="-2" y="0" width="4" height="10" fill="#795548"/>
+              </g>
+              
+              <g transform="translate(180, 100)">
+                <path
+                  d="M0,0 C-8,-10 -12,-25 0,-40 C12,-25 8,-10 0,0"
+                  fill="#2E7D32"
+                />
+                <rect x="-2" y="0" width="4" height="10" fill="#795548"/>
+              </g>
+
+              <!-- Herbe -->
+              <path
+                d="M0,140 L200,140"
+                stroke="#4CAF50"
+                stroke-width="2"
+              />
+              
+              <!-- Maison -->
+              <path
+                d="M60,40 L100,20 L140,40 L140,100 L60,100 Z"
+                fill="#FFE0B2"
+                stroke="#FB8C00"
+                stroke-width="2"
+              />
+              
+              <rect x="90" y="70" width="20" height="30" fill="#795548"/>
+              <rect x="70" y="60" width="15" height="15" fill="#E3F2FD"/>
+              <rect x="115" y="60" width="15" height="15" fill="#E3F2FD"/>
+            </svg>
+          </div>
+
+          <div class="energy-rating-scale">
+            <div class="rating-bar rating-A-plus">
+              <span>A+</span>
+              <span>≤ 50</span>
+            </div>
+            <div class="rating-bar rating-A">
+              <span>A</span>
+              <span>51 à 90</span>
+            </div>
+            <div class="rating-bar rating-B">
+              <span>B</span>
+              <span>91 à 150</span>
+            </div>
+            <div class="rating-bar rating-C">
+              <span>C</span>
+              <span>151 à 230</span>
+            </div>
+            <div class="rating-bar rating-D">
+              <span>D</span>
+              <span>231 à 330</span>
+            </div>
+            <div class="rating-bar rating-E">
+              <span>E</span>
+              <span>331 à 450</span>
+            </div>
+            <div class="rating-bar rating-F">
+              <span>F</span>
+              <span>451 à 590</span>
+            </div>
+            <div class="rating-bar rating-G">
+              <span>G</span>
+              <span>> 590</span>
+            </div>
+            <div class="flex justify-between text-xs text-gray-500 mt-1">
+              <span>Très performant</span>
+              <span>Peu performant</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="energy-line">
+          <span>Consommation :</span>
+          <span id="energy-value">0 kWh/an</span>
+        </div>
+        <div class="energy-line">
+          <span>Classe :</span>
+          <span id="energy-class">B</span>
+        </div>
+        <div class="energy-bar">
+          <div id="energy-bar-fill"></div>
+        </div>
+        <div id="energy-details">
+          <i>Aucun matériau sélectionné</i>
+        </div>
+      </div>
+
+      <div class="dimensions">
+        <div class="dim-card">
+          <strong>85 m²</strong>
+          <span>Surface</span>
+        </div>
+        <div class="dim-card">
+          <strong>3 Ch</strong>
+          <span>Chambres</span>
+        </div>
+        <div class="dim-card">
+          <strong>2 SdE</strong>
+          <span>Salles d'eau</span>
+        </div>
+      </div>
     </div>
 
-    <!-- Échelle énergétique mise à jour -->
-    <div class="energy-rating-scale">
-      <div class="rating-bar rating-A-plus">
-        <span class="rating-label">A+</span>
-        <span class="rating-value">≤ 50</span>
+    <div class="controls">
+      <h2>Configuration Tradi'home</h2>
+
+      <!-- Bardage -->
+      <div class="group" data-cat="Bardage">
+        <h3>Bardage extérieur</h3>
+        <div class="options">
+          <div class="option">
+            <div class="swatch" style="background-color:#C19A6B" data-color="#C19A6B" data-cost="520"></div>
+            <div class="option-label">Chêne clair</div>
+            <div class="option-price">+520 €</div>
+          </div>
+          <div class="option">
+            <div class="swatch" style="background-color:#8B5A2B" data-color="#8B5A2B" data-cost="790"></div>
+            <div class="option-label">Chêne foncé</div>
+            <div class="option-price">+790 €</div>
+          </div>
+          <div class="option">
+            <div class="swatch" style="background-color:#3D4C5C" data-color="#3D4C5C" data-cost="895"></div>
+            <div class="option-label">Gris oragé</div>
+            <div class="option-price">+895 €</div>
+          </div>
+        </div>
       </div>
-      [Autres barres de rating...]
+
+      <!-- Autres groupes de configuration -->
+      [... Reste des groupes de configuration identiques ...]
+
+      <div id="price-summary">
+        <h3>Récapitulatif de prix</h3>
+        <div class="line">
+          <span>Prix de base :</span>
+          <span id="base-price">170 000 €</span>
+        </div>
+        <div class="line">
+          <span>Vos options :</span>
+          <span id="opt-price">0 €</span>
+        </div>
+        <div class="line total">
+          <span>Total TTC :</span>
+          <span id="total-price">170 000 €</span>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn-save">Enregistrer la configuration</button>
+        <button class="btn-quote">Demander un devis</button>
+      </div>
     </div>
   </div>
 
-  [Reste du HTML existant...]
-
   <script>
-    // Mise à jour des valeurs énergétiques pour partir de B
     const energyImpact = {
       Bardage:    {'#C19A6B':2800,'#8B5A2B':2900,'#3D4C5C':3100},
       Toit:       {'#1A2E3F':2800,'#A6A6A6':2900,'#C0392B':3200},
@@ -148,8 +470,79 @@
       Gouttiere:  {'#FFFFFF':2800}
     };
 
-    // Reste du JavaScript existant avec les mêmes fonctions...
-    [JavaScript existant...]
+    function getEnergyClass(kwh) {
+      if (kwh < 2000) return 'A+';
+      if (kwh < 2500) return 'A';
+      if (kwh < 3000) return 'B';
+      if (kwh < 3500) return 'C';
+      if (kwh < 4000) return 'D';
+      if (kwh < 4500) return 'E';
+      if (kwh < 5000) return 'F';
+      return 'G';
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const mv = document.getElementById('mv');
+      const optEl = document.getElementById('opt-price');
+      const totalEl = document.getElementById('total-price');
+      const energyEl = document.getElementById('energy-value');
+      const classEl = document.getElementById('energy-class');
+      const barFill = document.getElementById('energy-bar-fill');
+      const ratingBars = document.querySelectorAll('.rating-bar');
+      const basePrice = 170000;
+      let selection = {};
+
+      function updateEnergy() {
+        let sum = 0;
+        Object.entries(selection).forEach(([cat, cost]) => {
+          sum += cost;
+        });
+        
+        energyEl.textContent = `${sum} kWh/an`;
+        const energyClass = getEnergyClass(sum);
+        classEl.textContent = energyClass;
+        
+        // Mise à jour des barres de rating
+        ratingBars.forEach(bar => {
+          const rating = bar.classList[1].split('-')[1];
+          if (rating === energyClass || 
+              (energyClass === 'A+' && rating === 'A-plus')) {
+            bar.classList.add('active');
+          } else {
+            bar.classList.remove('active');
+          }
+        });
+        
+        barFill.style.width = `${Math.min(100, Math.round(sum/5000*100))}%`;
+      }
+
+      // Gestion des clics sur les swatches
+      document.querySelectorAll('.swatch').forEach(swatch => {
+        swatch.addEventListener('click', () => {
+          const group = swatch.closest('.group');
+          const category = group.dataset.cat;
+          
+          group.querySelectorAll('.swatch').forEach(s => {
+            s.classList.remove('selected');
+          });
+          swatch.classList.add('selected');
+          
+          selection[category] = +swatch.dataset.cost;
+          const totalOptions = Object.values(selection).reduce((a,b) => a+b, 0);
+          
+          optEl.textContent = `${totalOptions.toLocaleString('fr-FR')} €`;
+          totalEl.textContent = `${(basePrice + totalOptions).toLocaleString('fr-FR')} €`;
+          
+          updateEnergy();
+        });
+      });
+
+      // Sélection initiale
+      document.querySelectorAll('.group').forEach(group => {
+        const firstSwatch = group.querySelector('.swatch');
+        if (firstSwatch) firstSwatch.click();
+      });
+    });
   </script>
 </body>
 </html>
