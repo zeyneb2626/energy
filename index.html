@@ -291,75 +291,51 @@
                 </linearGradient>
               </defs>
               
-              <!-- Arbres améliorés -->
-              <g transform="translate(20, 140)">
-                <path d="M0,0 C-2,-15 -1,-25 0,-30 C1,-25 2,-15 0,0" 
-                      fill="#795548"/>
-                <path d="M0,-15 C-5,-20 -8,-25 -5,-30 C-3,-32 3,-32 5,-30 C8,-25 5,-20 0,-15" 
-                      fill="#2E7D32"/>
-                <path d="M0,-20 C-4,-25 -6,-30 -3,-35 C-1,-37 1,-37 3,-35 C6,-30 4,-25 0,-20" 
-                      fill="#388E3C"/>
-              </g>
-              
-              <g transform="translate(180, 140)">
-                <path d="M0,0 C2,-15 1,-25 0,-30 C-1,-25 -2,-15 0,0" 
-                      fill="#795548"/>
-                <path d="M0,-15 C5,-20 8,-25 5,-30 C3,-32 -3,-32 -5,-30 C-8,-25 -5,-20 0,-15" 
-                      fill="#2E7D32"/>
-                <path d="M0,-20 C4,-25 6,-30 3,-35 C1,-37 -1,-37 -3,-35 C-6,-30 -4,-25 0,-20" 
-                      fill="#388E3C"/>
-              </g>
-              
               <!-- Sol avec herbe détaillée -->
               <path d="M0,140 H200" stroke="#2E7D32" stroke-width="2"/>
               
               <!-- Touffes d'herbe -->
-              <g>
-                <path d="M10,140 C11,138 12,137 11,136 M10,140 C9,138 10,137 11,137 M10,140 C10,138 11,137 10,136" 
-                      stroke="#4CAF50" stroke-width="0.5" stroke-linecap="round"/>
-                <path d="M30,140 C31,138 32,137 31,136 M30,140 C29,138 30,137 31,137 M30,140 C30,138 31,137 30,136"
-                      stroke="#4CAF50" stroke-width="0.5" stroke-linecap="round"/>
-                <path d="M50,140 C51,138 52,137 51,136 M50,140 C49,138 50,137 51,137 M50,140 C50,138 51,137 50,136"
-                      stroke="#4CAF50" stroke-width="0.5" stroke-linecap="round"/>
-                <path d="M70,140 C71,138 72,137 71,136 M70,140 C69,138 70,137 71,137 M70,140 C70,138 71,137 70,136"
-                      stroke="#4CAF50" stroke-width="0.5" stroke-linecap="round"/>
-              </g>
+              {[...Array(10)].map((_, i) => (
+                <g key={i} transform={`translate(${i * 20}, 140)`}>
+                  <path d={`
+                    M0,0 C1,-2 2,-3 1,-4
+                    M0,0 C-1,-2 0,-3 1,-3
+                    M0,0 C0,-2 1,-3 0,-4
+                  `} stroke="#4CAF50" stroke-width="0.5" stroke-linecap="round"/>
+                </g>
+              ))}
               
-              <path class="house-body"
-                d="M40,140 
-                   L40,80 
-                   C40,75 42,70 47,70
-                   L95,30
-                   C97,27 103,27 105,30
-                   L153,70
-                   C158,70 160,75 160,80
-                   L160,140"
-                fill="currentColor"
-                stroke="currentColor"
-                stroke-width="6"
-                stroke-linecap="round"
-                stroke-linejoin="round"/>
+              <!-- Corps principal de la maison -->
+              <path class="house-body" d="
+                M30,140 L30,80
+                L100,50 L170,80
+                L170,140
+                L30,140
+              " fill="currentColor" stroke="currentColor" stroke-width="4"/>
               
-              <path class="door"
-                d="M85,140
-                   L85,95
-                   C85,92 88,90 90,90
-                   L110,90
-                   C112,90 115,92 115,95
-                   L115,140"
-                fill="#8B4513"
-                stroke="#654321"
-                stroke-width="2"/>
+              <!-- Extension gauche -->
+              <path d="
+                M30,110 L10,110
+                L10,140 L30,140
+              " fill="currentColor" stroke="currentColor" stroke-width="4"/>
               
-              <rect x="55" y="100" width="20" height="20" fill="#E3F2FD" stroke="currentColor" stroke-width="2"/>
-              <rect x="125" y="100" width="20" height="20" fill="#E3F2FD" stroke="currentColor" stroke-width="2"/>
+              <!-- Extension droite (pergola) -->
+              <path d="
+                M170,110 L190,110
+                L190,140 L170,140
+              " fill="currentColor" stroke="currentColor" stroke-width="4"/>
               
-              <path class="chimney"
-                d="M130,45 L130,25"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="6"
-                stroke-linecap="round"/>
+              <!-- Fenêtres -->
+              <rect x="45" y="90" width="20" height="20" fill="#E3F2FD" stroke="currentColor" stroke-width="2"/>
+              <rect x="135" y="90" width="20" height="20" fill="#E3F2FD" stroke="currentColor" stroke-width="2"/>
+              
+              <!-- Porte -->
+              <rect x="90" y="100" width="20" height="40" fill="#8B4513" stroke="#654321" stroke-width="2"/>
+              
+              <!-- Pergola -->
+              <path d="M170,110 H190" stroke="currentColor" stroke-width="2" stroke-dasharray="4 4"/>
+              <path d="M175,110 V140" stroke="currentColor" stroke-width="2"/>
+              <path d="M185,110 V140" stroke="currentColor" stroke-width="2"/>
             </svg>
           </div>
 
