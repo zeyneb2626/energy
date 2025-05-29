@@ -37,5 +37,3 @@ const EnergyRatingScale: React.FC<EnergyRatingScaleProps> = ({ currentRating }) 
     </div>
   );
 };
-
-export default EnergyRatingScale;
