@@ -1,51 +1,275 @@
 <!DOCTYPE html>
 <html lang="fr">
-<!-- Head et autres contenus inchangés -->
 <head>
-  <!-- Contenu inchangé -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Configuration Modern'home</title>
+  <script type="module"
+          src="https://unpkg.com/@google/model-viewer@1.12.0/dist/model-viewer.min.js">
+  </script>
   <style>
-    /* Styles précédents inchangés */
+    * { box-sizing:border-box; margin:0; padding:0 }
+    html, body { height:100%; font-family:sans-serif; background:#f0f2f5 }
+    #configurator {
+      display:grid;
+      grid-template-columns:2fr 1fr;
+      height:100vh;
+      gap:1rem;
+      padding:1rem;
+    }
+    .viewer-card {
+      background:#fff;
+      border-radius:8px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.1);
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+      position: relative;
+      z-index: 1;
+    }
+    model-viewer {
+      flex:5;
+      width:100%; height:100%;
+      background:#dddddd;
+      pointer-events: all;
+      touch-action: none;
+    }
+
+    #energy-summary {
+      flex:2;
+      background:#fff;
+      border-top:1px solid #eee;
+      overflow-y:auto;
+      padding:1rem;
+    }
+    #energy-summary h3 {
+      font-size:1rem;
+      color:#222;
+      margin-bottom:1rem;
+    }
+    #energy-visual {
+      display:flex;
+      align-items:flex-start;
+      justify-content:flex-start;
+      gap:2rem;
+      margin-bottom:1rem;
+    }
+
+    .house-container {
+      width: 200px;
+      height: 200px;
+    }
+
+    .house-svg {
+      width: 100%;
+      height: 100%;
+      transition: all 0.6s ease-in-out;
+    }
 
     .energy-rating-scale {
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 1px;
-      transform: scale(0.75);
-      transform-origin: left top;
-      margin: -15px 0;
+      gap: 2px;
+      transform: scale(0.9);
+      transform-origin: left center;
     }
 
     .rating-bar {
-      position: relative;
       display: flex;
       align-items: center;
-      height: 20px;
-      margin-bottom: 1px;
-      padding: 0 8px;
+      height: 28px;
+      padding: 0 12px;
       color: white;
-      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%);
+      opacity: 0.7;
+      clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%);
+      width: 180px;
       transition: all 0.3s ease;
-      width: 85%;
     }
 
     .rating-bar.active {
-      width: 100%;
-      transform: translateX(6px);
+      opacity: 1;
+      width: 200px;
+      transform: translateX(8px);
     }
 
     .rating-label {
       font-weight: bold;
-      margin-right: 6px;
-      min-width: 22px;
+      margin-right: 8px;
+      min-width: 25px;
     }
 
     .rating-value {
-      font-size: 0.8em;
+      font-size: 0.85em;
     }
 
-    /* Reste des styles inchangés */
+    .rating-A-plus { background-color: #1B5E20; }
+    .rating-A { background-color: #2E7D32; }
+    .rating-B { background-color: #388E3C; }
+    .rating-C { background-color: #8BC34A; }
+    .rating-D { background-color: #FFEB3B; color: #000; }
+    .rating-E { background-color: #FFC107; color: #000; }
+    .rating-F { background-color: #FF9800; }
+    .rating-G { background-color: #F44336; }
+
+    .energy-line {
+      display:flex;
+      justify-content:space-between;
+      margin-bottom:.25rem;
+    }
+    .energy-bar {
+      width:100%;
+      height:6px;
+      background:#eee;
+      border-radius:3px;
+      overflow:hidden;
+      margin-top:.5rem;
+    }
+    #energy-bar-fill {
+      height:100%;
+      width:0;
+      background:#4caf50;
+      transition:width .5s;
+    }
+    #energy-details {
+      margin-top:.5rem;
+      font-size:.85rem;
+      color:#555;
+      line-height:1.4;
+      max-height:120px;
+      overflow:auto;
+    }
+
+    .dimensions {
+      flex:1;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      background:#fff;
+      padding:1rem;
+      border-top:1px solid #eee;
+      border-radius:0 0 8px 8px;
+      gap:1rem;
+    }
+    .dim-card {
+      background:#fff;
+      border:1px solid #eee;
+      border-radius:6px;
+      padding:.75rem;
+      text-align:center;
+      box-shadow:0 1px 4px rgba(0,0,0,0.05);
+    }
+    .dim-card strong { display:block; font-size:1.25rem; color:#222 }
+    .dim-card span { font-size:.85rem; color:#666 }
+
+    .controls {
+      background:#fff;
+      border-radius:8px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.1);
+      padding:1.5rem;
+      overflow-y:auto;
+      position: relative;
+      z-index: 2;
+      pointer-events: auto;
+    }
+    .controls h2 {
+      font-size:1.5rem;
+      color:#222;
+      margin-bottom:1rem;
+    }
+    .group { margin-bottom:1.5rem }
+    .group h3 {
+      font-size:1.1rem;
+      color:#333;
+      margin-bottom:.5rem;
+    }
+    .options {
+      display:flex;
+      gap:.75rem;
+      flex-wrap:wrap
+    }
+    .option {
+      text-align:center;
+      width:70px
+    }
+    .swatch {
+      width:100%;
+      aspect-ratio:1;
+      border:1px solid #ccc;
+      border-radius:4px;
+      cursor:pointer;
+      position:relative;
+      transition:border-color .2s;
+    }
+    .swatch:hover { border-color:#999 }
+    .swatch.selected { border-color:#006aff }
+    .swatch.selected::after {
+      content:'✔';
+      position:absolute;
+      top:4px;
+      right:6px;
+      color:#006aff;
+      font-size:1rem;
+    }
+    .option-label { margin-top:.3rem; font-size:.75rem; color:#444 }
+    .option-price { font-size:.7rem; color:#666 }
+
+    #price-summary {
+      background:#fff;
+      border:1px solid #eee;
+      border-radius:6px;
+      padding:1rem;
+      margin:1rem 0;
+      box-shadow:0 1px 4px rgba(0,0,0,0.05);
+    }
+    #price-summary h3 {
+      font-size:1rem;
+      margin-bottom:.75rem;
+      color:#222;
+    }
+    #price-summary .line {
+      display:flex;
+      justify-content:space-between;
+      margin-bottom:.5rem;
+      font-size:.9rem;
+      color:#333;
+    }
+    #price-summary .line.total {
+      font-weight:700;
+      font-size:1.1rem;
+    }
+
+    .action-buttons {
+      display:flex;
+      gap:.75rem
+    }
+    .action-buttons button {
+      flex:1;
+      padding:.75rem;
+      font-size:.95rem;
+      border:none;
+      border-radius:4px;
+      cursor:pointer;
+    }
+    .btn-save { background:#f0f0f0; color:#333 }
+    .btn-quote{ background:#006aff; color:#fff }
+
+    @media (max-width:1024px){
+      #configurator{ grid-template-columns:1fr }
+      model-viewer{ height:50vh!important; min-height:300px }
+    }
+    @media (max-width:600px){
+      model-viewer{ height:40vh!important; min-height:200px }
+      .dimensions{grid-template-columns:1fr}
+    }
   </style>
 </head>
-<!-- Reste du fichier inchangé -->
+<body>
+  <!-- Reste du contenu HTML inchangé -->
+  <div id="configurator">
+    <!-- Contenu inchangé -->
+  </div>
+  <script>
+    // Script inchangé
+  </script>
+</body>
 </html>
