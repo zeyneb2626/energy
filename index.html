@@ -1,6 +1,15 @@
 <!DOCTYPE html>
-[... Première partie du code inchangée jusqu'aux groupes de configuration ...]
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Configuration Tradi'home</title>
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  </head>
+  <body>
+    <div id="root"></div>
 
+    <div class="configurator">
       <!-- Bardage -->
       <div class="group" data-cat="Bardage">
         <h3>Bardage extérieur</h3>
@@ -113,4 +122,66 @@
         </div>
       </div>
 
-[... Reste du code inchangé ...]
+      <!-- Visualisation énergétique -->
+      <div class="energy-visualization">
+        <h3>Consommation énergétique</h3>
+        <div class="energy-rating-scale">
+          <div class="rating-bar rating-A-plus" data-rating="A+">
+            <span class="rating-label">A+</span>
+            <span class="rating-range">≤ 50</span>
+          </div>
+          <div class="rating-bar rating-A" data-rating="A">
+            <span class="rating-label">A</span>
+            <span class="rating-range">51 à 90</span>
+          </div>
+          <div class="rating-bar rating-B" data-rating="B">
+            <span class="rating-label">B</span>
+            <span class="rating-range">91 à 150</span>
+          </div>
+          <div class="rating-bar rating-C" data-rating="C">
+            <span class="rating-label">C</span>
+            <span class="rating-range">151 à 230</span>
+          </div>
+          <div class="rating-bar rating-D" data-rating="D">
+            <span class="rating-label">D</span>
+            <span class="rating-range">231 à 330</span>
+          </div>
+          <div class="rating-bar rating-E" data-rating="E">
+            <span class="rating-label">E</span>
+            <span class="rating-range">331 à 450</span>
+          </div>
+          <div class="rating-bar rating-F" data-rating="F">
+            <span class="rating-label">F</span>
+            <span class="rating-range">451 à 590</span>
+          </div>
+          <div class="rating-bar rating-G" data-rating="G">
+            <span class="rating-label">G</span>
+            <span class="rating-range">> 590</span>
+          </div>
+        </div>
+        <div class="energy-rating-legend">
+          <span>Très performant</span>
+          <span>Peu performant</span>
+        </div>
+      </div>
+
+      <!-- Informations supplémentaires -->
+      <div class="info-section">
+        <div class="info-item">
+          <span class="info-label">Surface</span>
+          <span class="info-value">85 m²</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Chambres</span>
+          <span class="info-value">3 Ch</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Salles d'eau</span>
+          <span class="info-value">2 SdE</span>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
