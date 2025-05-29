@@ -6,9 +6,9 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center py-12">
       <header className="mb-8 text-center">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2">Configurateur de Maison Énergétique</h1>
+        <h1 className="text-3xl font-bold text-gray-800 mb-2">Configuration Tradi'home</h1>
         <p className="text-gray-600 max-w-xl">
-          Sélectionnez différents matériaux pour voir comment ils influencent l'efficacité énergétique de votre maison.
+          Personnalisez votre maison et découvrez son efficacité énergétique en temps réel.
         </p>
       </header>
       
@@ -17,10 +17,8 @@ function App() {
       </main>
       
       <footer className="mt-12 text-center text-sm text-gray-500">
-        <p>© 2025 Configurateur Énergétique</p>
+        <p>© 2025 Tradi'home Configurateur</p>
       </footer>
     </div>
   );
 }
-
-export default App;
