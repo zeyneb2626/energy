@@ -15,73 +15,34 @@ const HouseSVG: React.FC<HouseSVGProps> = ({ rating }) => {
       xmlns="http://www.w3.org/2000/svg"
       className="w-full h-full"
     >
-      {/* Larger palm trees */}
+      {/* Trees */}
       {[
-        { x: 20, scale: 1, flip: false },
-        { x: 180, scale: -1, flip: true }
-      ].map((palm, index) => (
-        <g key={index} transform={`translate(${palm.x}, 140) scale(${palm.scale}, 1)`}>
-          {/* Trunk with texture */}
+        { x: 20, scale: 1 },
+        { x: 180, scale: -1 }
+      ].map((tree, index) => (
+        <g key={index} transform={`translate(${tree.x}, 140) scale(${tree.scale}, 1)`}>
+          {/* Tree trunk */}
           <path
             d="M0,0 
-               C-3,0 -4,-45 -2,-50 
-               C-1,-52 1,-52 2,-50 
-               C4,-45 3,0 0,0"
-            fill="#8B4513"
-            stroke="#654321"
+               C-2,0 -3,-20 -2,-25 
+               C-1,-27 1,-27 2,-25 
+               C3,-20 2,0 0,0"
+            fill="#795548"
+            stroke="#5D4037"
             strokeWidth="1"
           />
-          {/* Trunk texture */}
-          {[...Array(5)].map((_, i) => (
-            <path
-              key={i}
-              d={`M-1,${-10 * i} 
-                  C-2,${-10 * i - 5} -1,${-10 * i - 8} 1,${-10 * i}`}
-              fill="none"
-              stroke="#654321"
-              strokeWidth="0.5"
-              opacity="0.5"
-            />
-          ))}
           
-          {/* Palm leaves in multiple layers */}
-          {[...Array(5)].map((_, i) => (
-            <g key={i} transform={`translate(0, ${-45 - i * 3})`}>
-              {/* Left side leaves */}
+          {/* Tree foliage - multiple layers for depth */}
+          {[...Array(4)].map((_, i) => (
+            <g key={i} transform={`translate(0, ${-20 - i * 5})`}>
               <path
                 d={`M0,0 
-                    C-20,${-5 - i * 2} -35,${-8 - i * 2} -40,${-3 - i * 1}
-                    C-38,${-1 - i * 1} -35,${0 - i * 1} -30,${2 - i * 1}
-                    C-25,${1 - i * 1} -15,0 0,0`}
-                fill={`rgb(${34 + i * 15}, ${139 + i * 10}, ${34 + i * 15})`}
-                stroke="#006400"
-                strokeWidth="0.5"
-                transform={`rotate(${-20 - i * 15})`}
-              />
-              
-              {/* Right side leaves */}
-              <path
-                d={`M0,0 
-                    C20,${-5 - i * 2} 35,${-8 - i * 2} 40,${-3 - i * 1}
-                    C38,${-1 - i * 1} 35,${0 - i * 1} 30,${2 - i * 1}
-                    C25,${1 - i * 1} 15,0 0,0`}
-                fill={`rgb(${34 + i * 15}, ${139 + i * 10}, ${34 + i * 15})`}
-                stroke="#006400"
-                strokeWidth="0.5"
-                transform={`rotate(${20 + i * 15})`}
-              />
-            </g>
-          ))}
-          
-          {/* Coconuts */}
-          {[...Array(3)].map((_, i) => (
-            <g key={i} transform={`translate(${i * 2 - 2}, -45)`}>
-              <circle
-                cx="0"
-                cy="0"
-                r="1.5"
-                fill="#5D4037"
-                stroke="#4E342E"
+                    C-8,${-3} -15,${-6} -12,${-12}
+                    C-10,${-15} -5,${-18} 0,${-15}
+                    C5,${-18} 10,${-15} 12,${-12}
+                    C15,${-6} 8,${-3} 0,0`}
+                fill={`rgb(${34 + i * 10}, ${139 + i * 5}, ${34 + i * 10})`}
+                stroke="#2E7D32"
                 strokeWidth="0.5"
               />
             </g>
@@ -89,28 +50,31 @@ const HouseSVG: React.FC<HouseSVGProps> = ({ rating }) => {
         </g>
       ))}
 
-      {/* Ground/terrain with texture */}
+      {/* Ground with detailed grass */}
       <path
-        d="M20,140 
-           Q50,138 80,140 
-           Q110,142 140,140 
-           Q170,138 180,140"
-        fill="none"
+        d="M0,140 H200"
         stroke="#2E7D32"
         strokeWidth="2"
       />
-      {[...Array(8)].map((_, i) => (
-        <path
-          key={i}
-          d={`M${30 + i * 20},140 
-              Q${35 + i * 20},142 ${40 + i * 20},140`}
-          fill="none"
-          stroke="#1B5E20"
-          strokeWidth="1"
-        />
+      
+      {/* Grass tufts */}
+      {[...Array(20)].map((_, i) => (
+        <g key={i} transform={`translate(${i * 10}, 140)`}>
+          <path
+            d={`M0,0 
+                C1,-3 2,-4 3,-3
+                M0,0
+                C-1,-2 -0.5,-3 0.5,-4
+                M0,0
+                C0,-2 0.5,-3 1,-2`}
+            stroke="#4CAF50"
+            strokeWidth="0.5"
+            strokeLinecap="round"
+          />
+        </g>
       ))}
 
-      {/* House foundation with texture */}
+      {/* House foundation */}
       <path
         d="M35,140 
            Q100,138 165,140"
@@ -120,7 +84,7 @@ const HouseSVG: React.FC<HouseSVGProps> = ({ rating }) => {
         strokeLinecap="round"
       />
 
-      {/* Main house structure with detailed walls */}
+      {/* Main house structure */}
       <path
         d="M40,140 
            L40,80 
@@ -138,7 +102,7 @@ const HouseSVG: React.FC<HouseSVGProps> = ({ rating }) => {
         strokeLinejoin="round"
       />
 
-      {/* Wall texture details */}
+      {/* Wall texture */}
       {[...Array(5)].map((_, i) => (
         <path
           key={i}
@@ -150,7 +114,7 @@ const HouseSVG: React.FC<HouseSVGProps> = ({ rating }) => {
         />
       ))}
       
-      {/* Enhanced door with frame and details */}
+      {/* Door with details */}
       <path
         d="M85,140
            L85,95
@@ -179,7 +143,7 @@ const HouseSVG: React.FC<HouseSVGProps> = ({ rating }) => {
         strokeWidth="1"
       />
 
-      {/* Enhanced windows with frames and glass effect */}
+      {/* Windows */}
       {[
         [55, 100],
         [125, 100]
@@ -211,7 +175,7 @@ const HouseSVG: React.FC<HouseSVGProps> = ({ rating }) => {
         </g>
       ))}
 
-      {/* Window reflection gradient */}
+      {/* Window reflection */}
       <defs>
         <linearGradient id="windowGradient" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="white" stopOpacity="0.5"/>
@@ -219,7 +183,7 @@ const HouseSVG: React.FC<HouseSVGProps> = ({ rating }) => {
         </linearGradient>
       </defs>
 
-      {/* Enhanced chimney with brick texture */}
+      {/* Chimney */}
       <path
         d="M130,45 L130,25"
         fill="none"
@@ -228,7 +192,7 @@ const HouseSVG: React.FC<HouseSVGProps> = ({ rating }) => {
         strokeLinecap="round"
       />
       
-      {/* Brick texture on chimney */}
+      {/* Brick texture */}
       {[...Array(3)].map((_, i) => (
         <path
           key={i}
@@ -239,7 +203,7 @@ const HouseSVG: React.FC<HouseSVGProps> = ({ rating }) => {
         />
       ))}
       
-      {/* Animated smoke effect */}
+      {/* Smoke */}
       <g className="smoke">
         {[4, 8, 12].map((y) => (
           <path
