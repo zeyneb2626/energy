@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Configuration Modern'home</title>
-  <script type="module" src="https://unpkg.com/@google/model-viewer@1.12.0/dist/model-viewer.min.js"></script>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
     * { box-sizing:border-box; margin:0; padding:0 }
     html, body { height:100%; font-family:sans-serif; background:#f0f2f5 }
@@ -40,48 +40,53 @@
     }
 
     #configurator {
-      display:grid;
-      grid-template-columns:2fr 1fr;
-      height:100vh;
-      gap:1rem;
-      padding:1rem;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      height: 100vh;
+      gap: 1rem;
+      padding: 1rem;
     }
+
     .viewer-card {
-      background:#fff;
-      border-radius:8px;
-      box-shadow:0 2px 8px rgba(0,0,0,0.1);
-      display:flex;
-      flex-direction:column;
-      overflow:hidden;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
       position: relative;
       z-index: 1;
     }
+
     model-viewer {
-      flex:5;
-      width:100%; height:100%;
-      background:#dddddd;
+      flex: 5;
+      width: 100%;
+      height: 100%;
+      background: #dddddd;
       pointer-events: all;
       touch-action: none;
     }
 
     #energy-summary {
-      flex:2;
-      background:#fff;
-      border-top:1px solid #eee;
-      overflow-y:auto;
-      padding:1rem;
+      flex: 2;
+      background: #fff;
+      border-top: 1px solid #eee;
+      overflow-y: auto;
+      padding: 1rem;
     }
+
     #energy-summary h3 {
-      font-size:1rem;
-      color:#222;
-      margin-bottom:1rem;
+      font-size: 1rem;
+      color: #222;
+      margin-bottom: 1rem;
     }
+
     #energy-visual {
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:2rem;
-      margin-bottom:1rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 1rem;
     }
 
     .house-container {
@@ -140,68 +145,74 @@
     .rating-G { background-color: #F44336; }
 
     .energy-line {
-      display:flex;
-      justify-content:space-between;
-      margin-bottom:.25rem;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: .25rem;
     }
+
     .energy-bar {
-      width:100%;
-      height:6px;
-      background:#eee;
-      border-radius:3px;
-      overflow:hidden;
-      margin-top:.5rem;
+      width: 100%;
+      height: 6px;
+      background: #eee;
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: .5rem;
     }
+
     #energy-bar-fill {
-      height:100%;
-      width:0;
-      background:#4caf50;
-      transition:width .5s;
+      height: 100%;
+      width: 0;
+      background: #4caf50;
+      transition: width .5s;
     }
+
     #energy-details {
-      margin-top:.5rem;
-      font-size:.85rem;
-      color:#555;
-      line-height:1.4;
-      max-height:120px;
-      overflow:auto;
+      margin-top: .5rem;
+      font-size: .85rem;
+      color: #555;
+      line-height: 1.4;
+      max-height: 120px;
+      overflow: auto;
     }
 
     .dimensions {
-      flex:1;
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      background:#fff;
-      padding:1rem;
-      border-top:1px solid #eee;
-      border-radius:0 0 8px 8px;
-      gap:1rem;
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      background: #fff;
+      padding: 1rem;
+      border-top: 1px solid #eee;
+      border-radius: 0 0 8px 8px;
+      gap: 1rem;
     }
+
     .dim-card {
-      background:#fff;
-      border:1px solid #eee;
-      border-radius:6px;
-      padding:.75rem;
-      text-align:center;
-      box-shadow:0 1px 4px rgba(0,0,0,0.05);
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 6px;
+      padding: .75rem;
+      text-align: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
     }
-    .dim-card strong { display:block; font-size:1.25rem; color:#222 }
-    .dim-card span { font-size:.85rem; color:#666 }
+
+    .dim-card strong { display: block; font-size: 1.25rem; color: #222; }
+    .dim-card span { font-size: .85rem; color: #666; }
 
     .controls {
-      background:#fff;
-      border-radius:8px;
-      box-shadow:0 2px 8px rgba(0,0,0,0.1);
-      padding:1.5rem;
-      overflow-y:auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+      overflow-y: auto;
       position: relative;
       z-index: 2;
       pointer-events: auto;
     }
+
     .controls h2 {
-      font-size:1.5rem;
-      color:#222;
-      margin-bottom:1rem;
+      font-size: 1.5rem;
+      color: #222;
+      margin-bottom: 1rem;
     }
 
     .price-display {
@@ -247,65 +258,73 @@
       color: #1a202c;
     }
 
-    .group { margin-bottom:1.5rem }
+    .group { margin-bottom: 1.5rem; }
     .group h3 {
-      font-size:1.1rem;
-      color:#333;
-      margin-bottom:.5rem;
+      font-size: 1.1rem;
+      color: #333;
+      margin-bottom: .5rem;
     }
+
     .options {
-      display:flex;
-      gap:.75rem;
-      flex-wrap:wrap
+      display: flex;
+      gap: .75rem;
+      flex-wrap: wrap;
     }
+
     .option {
-      text-align:center;
-      width:70px
+      text-align: center;
+      width: 70px;
     }
+
     .swatch {
-      width:100%;
-      aspect-ratio:1;
-      border:1px solid #ccc;
-      border-radius:4px;
-      cursor:pointer;
-      position:relative;
-      transition:border-color .2s;
+      width: 100%;
+      aspect-ratio: 1;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+      position: relative;
+      transition: border-color .2s;
     }
-    .swatch:hover { border-color:#999 }
-    .swatch.selected { border-color:#006aff }
+
+    .swatch:hover { border-color: #999; }
+    .swatch.selected { border-color: #006aff; }
     .swatch.selected::after {
-      content:'✔';
-      position:absolute;
-      top:4px;
-      right:6px;
-      color:#006aff;
-      font-size:1rem;
+      content: '✔';
+      position: absolute;
+      top: 4px;
+      right: 6px;
+      color: #006aff;
+      font-size: 1rem;
     }
-    .option-label { margin-top:.3rem; font-size:.75rem; color:#444 }
-    .option-price { font-size:.7rem; color:#666 }
+
+    .option-label { margin-top: .3rem; font-size: .75rem; color: #444; }
+    .option-price { font-size: .7rem; color: #666; }
 
     .action-buttons {
-      display:flex;
-      gap:.75rem
+      display: flex;
+      gap: .75rem;
     }
-    .action-buttons button {
-      flex:1;
-      padding:.75rem;
-      font-size:.95rem;
-      border:none;
-      border-radius:4px;
-      cursor:pointer;
-    }
-    .btn-save { background:#f0f0f0; color:#333 }
-    .btn-quote{ background:#006aff; color:#fff }
 
-    @media (max-width:1024px){
-      #configurator{ grid-template-columns:1fr }
-      model-viewer{ height:50vh!important; min-height:300px }
+    .action-buttons button {
+      flex: 1;
+      padding: .75rem;
+      font-size: .95rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
     }
-    @media (max-width:600px){
-      model-viewer{ height:40vh!important; min-height:200px }
-      .dimensions{grid-template-columns:1fr}
+
+    .btn-save { background: #f0f0f0; color: #333; }
+    .btn-quote { background: #006aff; color: #fff; }
+
+    @media (max-width: 1024px) {
+      #configurator { grid-template-columns: 1fr; }
+      model-viewer { height: 50vh !important; min-height: 300px; }
+    }
+
+    @media (max-width: 600px) {
+      model-viewer { height: 40vh !important; min-height: 200px; }
+      .dimensions { grid-template-columns: 1fr; }
     }
 
     @keyframes drift {
@@ -345,36 +364,26 @@
 
       <div id="energy-summary">
         <h3>Performance énergétique estimée</h3>
-
         <div id="energy-visual">
           <div class="house-container">
             <svg class="house-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
               <path
                 class="house-body"
-                d="M20,70 
-                   L20,40 
-                   L50,15 
-                   L80,40
-                   L80,70"
+                d="M20,70 L20,40 L50,15 L80,40 L80,70"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="6"
                 stroke-linejoin="round"
                 stroke-linecap="round"/>
-              
               <path
                 d="M65,30 L65,20"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="6"
                 stroke-linecap="round"/>
-              
               <g class="smoke">
                 <path
-                  d="M63,17 
-                     C67,15 69,13 67,11
-                     M67,12
-                     C71,10 73,8 71,6"
+                  d="M63,17 C67,15 69,13 67,11 M67,12 C71,10 73,8 71,6"
                   fill="none"
                   stroke="#999"
                   stroke-width="1"
@@ -454,7 +463,6 @@
         </div>
       </div>
 
-      <!-- Menuiserie ALU -->
       <div class="group" data-cat="Menuiserie">
         <h3>Menuiserie ALU</h3>
         <div class="options">
@@ -471,7 +479,6 @@
         </div>
       </div>
 
-      <!-- Gouttière -->
       <div class="group" data-cat="Gouttiere">
         <h3>Gouttière et descente</h3>
         <div class="options">
@@ -483,7 +490,6 @@
         </div>
       </div>
 
-      <!-- Pergola -->
       <div class="group" data-cat="Pergola">
         <h3>Pergola bioclimatique</h3>
         <div class="options">
@@ -500,7 +506,6 @@
         </div>
       </div>
 
-      <!-- Peinture -->
       <div class="group" data-cat="Murs">
         <h3>Peinture (mur extérieur)</h3>
         <div class="options">
@@ -522,7 +527,6 @@
         </div>
       </div>
 
-      <!-- Toit -->
       <div class="group" data-cat="Toit">
         <h3>Tôle ondulée</h3>
         <div class="options">
@@ -563,11 +567,11 @@
 
   <script>
     const energyImpact = {
-      Toit:       {'#1A2E3F':120,'#A6A6A6':150,'#C0392B':180},
-      Pergola:    {'#FFFFFF':120,'#000000':150},
-      Murs:       {'#FFFFFF':120,'#D4C4A3':150,'#E6C7B1':180},
+      Toit: {'#1A2E3F':120,'#A6A6A6':150,'#C0392B':180},
+      Pergola: {'#FFFFFF':120,'#000000':150},
+      Murs: {'#FFFFFF':120,'#D4C4A3':150,'#E6C7B1':180},
       Menuiserie: {'#FFFFFF':120,'#000000':150},
-      Gouttiere:  {'#FFFFFF':120}
+      Gouttiere: {'#FFFFFF':120}
     };
 
     const ratingColors = {
@@ -606,7 +610,6 @@
       const basePrice = 170000;
       let selection = {};
 
-      // Gestion de l'affichage du prix fixe
       window.addEventListener('scroll', () => {
         if (window.scrollY > 100) {
           fixedPrice.classList.add('visible');
@@ -617,10 +620,10 @@
 
       const targets = {
         Menuiserie: ['menui','volets'],
-        Gouttiere:  ['gouttiere'],
-        Pergola:    ['pergola'],
-        Murs:       ['murs'],
-        Toit:       ['toit']
+        Gouttiere: ['gouttiere'],
+        Pergola: ['pergola'],
+        Murs: ['murs'],
+        Toit: ['toit']
       };
 
       function hex2rgba(h) {
@@ -634,13 +637,13 @@
       }
 
       function updateEnergy() {
-        let sum = 120, lines = []; // Valeur de base à 120 kWh/an (classe B)
+        let sum = 120, lines = [];
         Object.entries(selection).forEach(([cat]) => {
           const sw = document.querySelector(`.group[data-cat="${cat}"] .swatch.selected`);
           if(!sw) return;
           const col = sw.dataset.color;
           const imp = energyImpact[cat][col] || 120;
-          sum += (imp - 120); // On soustrait la valeur de base pour avoir l'impact net
+          sum += (imp - 120);
           if (imp !== 120) {
             lines.push(`• ${cat} – ${sw.nextElementSibling.textContent}: ${imp>120?'+':''}${imp-120} kWh/an`);
           }
@@ -653,12 +656,11 @@
 
         ratingBars.forEach(bar => {
           const rating = bar.dataset.rating;
-          bar.classList.toggle('active', 
+          bar.classList.toggle('active',
             (rating === 'A+' && cls === 'Aplus') || rating === cls);
         });
 
         houseSvg.style.color = ratingColors[cls];
-
         document.getElementById('energy-details').innerHTML =
           lines.length ? lines.join('<br>') : '<i>Configuration de base</i>';
       }
