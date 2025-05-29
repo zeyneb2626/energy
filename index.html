@@ -4,19 +4,41 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Configuration Modern'home</title>
-  <script type="module"
-          src="https://unpkg.com/@google/model-viewer@1.12.0/dist/model-viewer.min.js">
-  </script>
+  <script type="module" src="https://unpkg.com/@google/model-viewer@1.12.0/dist/model-viewer.min.js"></script>
   <style>
     * { box-sizing:border-box; margin:0; padding:0 }
     html, body { height:100%; font-family:sans-serif; background:#f0f2f5 }
-    #configurator {
-      display:grid;
-      grid-template-columns:2fr 1fr;
-      height:100vh;
-      gap:1rem;
-      padding:1rem;
+    
+    .fixed-price {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      z-index: 1000;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #1a202c;
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
     }
+
+    .fixed-price.visible {
+      transform: translateY(0);
+    }
+
+    #configurator {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      height: 100vh;
+      gap: 1rem;
+      padding: 1rem;
+      padding-top: 4rem;
+    }
+
     .viewer-card {
       background:#fff;
       border-radius:8px;
@@ -264,12 +286,207 @@
   </style>
 </head>
 <body>
-  <!-- Reste du contenu HTML inchangé -->
-  <div id="configurator">
-    <!-- Contenu inchangé -->
+  <div id="fixed-price" class="fixed-price">
+    Prix TTC : <span id="fixed-total">170 000 €</span>
   </div>
+
+  <div id="configurator">
+    <div class="viewer-card">
+      <model-viewer id="mv" 
+        camera-controls
+        auto-rotate
+        interaction-prompt="none"
+        src="models/house.glb"
+        shadow-intensity="1"
+        exposure="1"
+        environment-image="environments/studio.hdr">
+      </model-viewer>
+      <div id="energy-summary">
+        <h3>Performance énergétique</h3>
+        <div id="energy-visual">
+          <div class="house-container">
+            <svg class="house-svg" viewBox="0 0 100 100">
+              <!-- House SVG content -->
+            </svg>
+          </div>
+          <div class="energy-rating-scale">
+            <div class="rating-bar rating-A-plus"><span class="rating-label">A+</span><span class="rating-value">&lt; 50</span></div>
+            <div class="rating-bar rating-A"><span class="rating-label">A</span><span class="rating-value">51-90</span></div>
+            <div class="rating-bar rating-B"><span class="rating-label">B</span><span class="rating-value">91-150</span></div>
+            <div class="rating-bar rating-C"><span class="rating-label">C</span><span class="rating-value">151-230</span></div>
+            <div class="rating-bar rating-D"><span class="rating-label">D</span><span class="rating-value">231-330</span></div>
+            <div class="rating-bar rating-E"><span class="rating-label">E</span><span class="rating-value">331-450</span></div>
+            <div class="rating-bar rating-F"><span class="rating-label">F</span><span class="rating-value">451-590</span></div>
+            <div class="rating-bar rating-G"><span class="rating-label">G</span><span class="rating-value">&gt; 590</span></div>
+          </div>
+        </div>
+        <div class="energy-line">
+          <span>Consommation d'énergie</span>
+          <span id="energy-value">120 kWh/m²/an</span>
+        </div>
+        <div class="energy-bar">
+          <div id="energy-bar-fill"></div>
+        </div>
+        <div id="energy-details">
+          Cette estimation est basée sur la configuration actuelle de votre maison.
+          Les valeurs réelles peuvent varier en fonction de divers facteurs.
+        </div>
+      </div>
+      <div class="dimensions">
+        <div class="dim-card">
+          <strong>120 m²</strong>
+          <span>Surface habitable</span>
+        </div>
+        <div class="dim-card">
+          <strong>3</strong>
+          <span>Chambres</span>
+        </div>
+        <div class="dim-card">
+          <strong>2</strong>
+          <span>Salles de bain</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <h2>Configuration Modern'home</h2>
+
+      <div class="group" data-cat="roof">
+        <h3>Toiture</h3>
+        <div class="options">
+          <div class="option">
+            <div class="swatch" data-color="#1a1a1a" data-cost="0" style="background:#1a1a1a"></div>
+            <div class="option-label">Ardoise noire</div>
+            <div class="option-price">inclus</div>
+          </div>
+          <div class="option">
+            <div class="swatch" data-color="#8B4513" data-cost="2000" style="background:#8B4513"></div>
+            <div class="option-label">Tuile terre</div>
+            <div class="option-price">+2 000 €</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="group" data-cat="walls">
+        <h3>Façade</h3>
+        <div class="options">
+          <div class="option">
+            <div class="swatch" data-color="#F5F5F5" data-cost="0" style="background:#F5F5F5"></div>
+            <div class="option-label">Blanc</div>
+            <div class="option-price">inclus</div>
+          </div>
+          <div class="option">
+            <div class="swatch" data-color="#E8E4D5" data-cost="1500" style="background:#E8E4D5"></div>
+            <div class="option-label">Crème</div>
+            <div class="option-price">+1 500 €</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="price-summary">
+        <h3>Récapitulatif de prix</h3>
+        <div class="line"><span>Prix de base :</span><span id="base-price">170 000 €</span></div>
+        <div class="line"><span>Options :</span><span id="opt-price">0 €</span></div>
+        <div class="line total"><span>Total TTC :</span><span id="total-price">170 000 €</span></div>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn-save">Enregistrer la configuration</button>
+        <button class="btn-quote">Demander un devis</button>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // Script inchangé
+    window.addEventListener('DOMContentLoaded', () => {
+      const mv = document.getElementById('mv');
+      const fixedTotalEl = document.getElementById('fixed-total');
+      const optEl = document.getElementById('opt-price');
+      const totalEl = document.getElementById('total-price');
+      const fixedPrice = document.getElementById('fixed-price');
+      const basePrice = 170000;
+      let selection = {};
+
+      let lastScrollY = window.scrollY;
+      window.addEventListener('scroll', () => {
+        const currentScroll = window.scrollY;
+        if (currentScroll > 100) {
+          fixedPrice.classList.add('visible');
+        } else {
+          fixedPrice.classList.remove('visible');
+        }
+        lastScrollY = currentScroll;
+      });
+
+      mv.addEventListener('load', () => {
+        const mats = mv.model.materials;
+        document.querySelectorAll('.group').forEach(group => {
+          const cat = group.dataset.cat;
+          const frags = targets[cat] || [];
+          group.querySelectorAll('.swatch').forEach(sw => {
+            sw.addEventListener('click', () => {
+              group.querySelectorAll('.swatch').forEach(x => x.classList.remove('selected'));
+              sw.classList.add('selected');
+              selection[cat] = +sw.dataset.cost;
+              const tot = Object.values(selection).reduce((a,b) => a+b, 0);
+              const totalPrice = `${(basePrice+tot).toLocaleString('fr-FR')} €`;
+              fixedTotalEl.textContent = totalPrice;
+              optEl.textContent = `${tot.toLocaleString('fr-FR')} €`;
+              totalEl.textContent = totalPrice;
+              const rgba = hex2rgba(sw.dataset.color);
+              mats.forEach(m => {
+                const name = m.name.toLowerCase();
+                if(frags.some(f => name.includes(f))) {
+                  m.pbrMetallicRoughness.setBaseColorFactor(rgba);
+                }
+              });
+              updateEnergy();
+            });
+          });
+          const first = group.querySelector('.swatch');
+          if(first) first.click();
+        });
+        updateEnergy();
+      });
+
+      function hex2rgba(h) {
+        const v = parseInt(h.slice(1), 16);
+        return [
+          (v >> 16 & 255) / 255,
+          (v >> 8 & 255) / 255,
+          (v & 255) / 255,
+          1
+        ];
+      }
+
+      function updateEnergy() {
+        const energyValue = document.getElementById('energy-value');
+        const energyBarFill = document.getElementById('energy-bar-fill');
+        const ratings = document.querySelectorAll('.rating-bar');
+        
+        let baseEnergy = 120;
+        let totalImpact = Object.entries(selection).reduce((acc, [cat, cost]) => {
+          return acc + (cost > 0 ? -5 : 0);
+        }, 0);
+        
+        let finalEnergy = Math.max(50, baseEnergy + totalImpact);
+        energyValue.textContent = `${finalEnergy} kWh/m²/an`;
+        energyBarFill.style.width = `${(finalEnergy/590)*100}%`;
+        
+        ratings.forEach(r => r.classList.remove('active'));
+        let activeRating;
+        if(finalEnergy <= 50) activeRating = 'A-plus';
+        else if(finalEnergy <= 90) activeRating = 'A';
+        else if(finalEnergy <= 150) activeRating = 'B';
+        else if(finalEnergy <= 230) activeRating = 'C';
+        else if(finalEnergy <= 330) activeRating = 'D';
+        else if(finalEnergy <= 450) activeRating = 'E';
+        else if(finalEnergy <= 590) activeRating = 'F';
+        else activeRating = 'G';
+        
+        document.querySelector(`.rating-${activeRating}`).classList.add('active');
+      }
+    });
   </script>
 </body>
 </html>
