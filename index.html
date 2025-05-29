@@ -83,11 +83,13 @@
       padding: 0 8px;
       color: white;
       font-size: 0.9em;
-      transition: all 0.3s ease-in-out;
       width: 85%;
+      transition: all 0.3s ease-in-out;
+      opacity: 0.7;
     }
 
     .rating-bar.active {
+      opacity: 1;
       width: 100%;
       transform: translateX(10px);
     }
@@ -423,7 +425,7 @@
 
         <div class="energy-line">
           <span>Consommation :</span>
-          <span id="energy-value">2800 kWh/an</span>
+          <span id="energy-value">120 kWh/an</span>
         </div>
         <div class="energy-line">
           <span>Classe :</span>
@@ -433,7 +435,7 @@
           <div id="energy-bar-fill"></div>
         </div>
         <h4 style="margin-top:1rem;font-size:.9rem;color:#555">Détail par matériau</h4>
-        <div id="energy-details"><i>Aucun matériau sélectionné</i></div>
+        <div id="energy-details"><i>Configuration de base</i></div>
       </div>
 
       <div class="dimensions">
@@ -451,17 +453,17 @@
         <h3>Bardage extérieur</h3>
         <div class="options">
           <div class="option">
-            <div class="swatch" style="background-color:#C19A6B" data-color="#C19A6B" data-cost="520"></div>
+            <div class="swatch" style="background-color:#C19A6B" data-color="#C19A6B" data-cost="520" data-energy="120"></div>
             <div class="option-label">Chêne clair</div>
             <div class="option-price">+520 €</div>
           </div>
           <div class="option">
-            <div class="swatch" style="background-color:#8B5A2B" data-color="#8B5A2B" data-cost="790"></div>
+            <div class="swatch" style="background-color:#8B5A2B" data-color="#8B5A2B" data-cost="790" data-energy="150"></div>
             <div class="option-label">Chêne foncé</div>
             <div class="option-price">+790 €</div>
           </div>
           <div class="option">
-            <div class="swatch" style="background-color:#3D4C5C" data-color="#3D4C5C" data-cost="895"></div>
+            <div class="swatch" style="background-color:#3D4C5C" data-color="#3D4C5C" data-cost="895" data-energy="180"></div>
             <div class="option-label">Gris oragé</div>
             <div class="option-price">+895 €</div>
           </div>
@@ -473,12 +475,12 @@
         <h3>Menuiserie ALU</h3>
         <div class="options">
           <div class="option">
-            <div class="swatch" style="background-color:#FFFFFF" data-color="#FFFFFF" data-cost="0"></div>
+            <div class="swatch" style="background-color:#FFFFFF" data-color="#FFFFFF" data-cost="0" data-energy="120"></div>
             <div class="option-label">Blanc</div>
             <div class="option-price">+0 €</div>
           </div>
           <div class="option">
-            <div class="swatch" style="background-color:#000000" data-color="#000000" data-cost="2499"></div>
+            <div class="swatch" style="background-color:#000000" data-color="#000000" data-cost="2499" data-energy="150"></div>
             <div class="option-label">Noir</div>
             <div class="option-price">+2 499 €</div>
           </div>
@@ -490,7 +492,7 @@
         <h3>Gouttière et descente</h3>
         <div class="options">
           <div class="option">
-            <div class="swatch" style="background-color:#FFFFFF" data-color="#FFFFFF" data-cost="0"></div>
+            <div class="swatch" style="background-color:#FFFFFF" data-color="#FFFFFF" data-cost="0" data-energy="120"></div>
             <div class="option-label">Blanc</div>
             <div class="option-price">+0 €</div>
           </div>
@@ -502,12 +504,12 @@
         <h3>Pergola bioclimatique</h3>
         <div class="options">
           <div class="option">
-            <div class="swatch" style="background-color:#FFFFFF" data-color="#FFFFFF" data-cost="8500"></div>
+            <div class="swatch" style="background-color:#FFFFFF" data-color="#FFFFFF" data-cost="8500" data-energy="120"></div>
             <div class="option-label">Blanc</div>
             <div class="option-price">+8 500 €</div>
           </div>
           <div class="option">
-            <div class="swatch" style="background-color:#000000" data-color="#000000" data-cost="9500"></div>
+            <div class="swatch" style="background-color:#000000" data-color="#000000" data-cost="9500" data-energy="150"></div>
             <div class="option-label">Noir</div>
             <div class="option-price">+9 500 €</div>
           </div>
@@ -519,17 +521,17 @@
         <h3>Peinture (mur extérieur)</h3>
         <div class="options">
           <div class="option">
-            <div class="swatch" style="background-color:#FFFFFF" data-color="#FFFFFF" data-cost="0"></div>
+            <div class="swatch" style="background-color:#FFFFFF" data-color="#FFFFFF" data-cost="0" data-energy="120"></div>
             <div class="option-label">Blanc</div>
             <div class="option-price">+0 €</div>
           </div>
           <div class="option">
-            <div class="swatch" style="background-color:#D4C4A3" data-color="#D4C4A3" data-cost="999"></div>
+            <div class="swatch" style="background-color:#D4C4A3" data-color="#D4C4A3" data-cost="999" data-energy="150"></div>
             <div class="option-label">Beige WES</div>
             <div class="option-price">+999 €</div>
           </div>
           <div class="option">
-            <div class="swatch" style="background-color:#E6C7B1" data-color="#E6C7B1" data-cost="1499"></div>
+            <div class="swatch" style="background-color:#E6C7B1" data-color="#E6C7B1" data-cost="1499" data-energy="180"></div>
             <div class="option-label">Ocre Mojave</div>
             <div class="option-price">+1 499 €</div>
           </div>
@@ -541,17 +543,17 @@
         <h3>Tôle ondulée</h3>
         <div class="options">
           <div class="option">
-            <div class="swatch" style="background-color:#1A2E3F" data-color="#1A2E3F" data-cost="0"></div>
+            <div class="swatch" style="background-color:#1A2E3F" data-color="#1A2E3F" data-cost="0" data-energy="120"></div>
             <div class="option-label">Bleu Ardoise</div>
             <div class="option-price">+0 €</div>
           </div>
           <div class="option">
-            <div class="swatch" style="background-color:#A6A6A6" data-color="#A6A6A6" data-cost="0"></div>
+            <div class="swatch" style="background-color:#A6A6A6" data-color="#A6A6A6" data-cost="0" data-energy="150"></div>
             <div class="option-label">Gris Acier</div>
             <div class="option-price">+0 €</div>
           </div>
           <div class="option">
-            <div class="swatch" style="background-color:#C0392B" data-color="#C0392B" data-cost="1800"></div>
+            <div class="swatch" style="background-color:#C0392B" data-color="#C0392B" data-cost="1800" data-energy="180"></div>
             <div class="option-label">Rouge Hibiscus</div>
             <div class="option-price">+1 800 €</div>
           </div>
@@ -575,12 +577,12 @@
 
   <script>
     const energyImpact = {
-      Bardage:    {'#C19A6B':2800,'#8B5A2B':2900,'#3D4C5C':3100},
-      Toit:       {'#1A2E3F':2800,'#A6A6A6':2900,'#C0392B':3200},
-      Pergola:    {'#FFFFFF':2700,'#000000':3000},
-      Murs:       {'#FFFFFF':2800,'#D4C4A3':2900,'#E6C7B1':3000},
-      Menuiserie: {'#FFFFFF':2800,'#000000':2900},
-      Gouttiere:  {'#FFFFFF':2800}
+      Bardage:    {'#C19A6B':120,'#8B5A2B':150,'#3D4C5C':180},
+      Toit:       {'#1A2E3F':120,'#A6A6A6':150,'#C0392B':180},
+      Pergola:    {'#FFFFFF':120,'#000000':150},
+      Murs:       {'#FFFFFF':120,'#D4C4A3':150,'#E6C7B1':180},
+      Menuiserie: {'#FFFFFF':120,'#000000':150},
+      Gouttiere:  {'#FFFFFF':120}
     };
 
     const ratingColors = {
@@ -595,13 +597,13 @@
     };
 
     function getEnergyClass(kwh) {
-      if(kwh < 2000) return 'Aplus';
-      if(kwh < 2500) return 'A';
-      if(kwh < 3000) return 'B';
-      if(kwh < 3500) return 'C';
-      if(kwh < 4000) return 'D';
-      if(kwh < 4500) return 'E';
-      if(kwh < 5000) return 'F';
+      if(kwh <= 50) return 'Aplus';
+      if(kwh <= 90) return 'A';
+      if(kwh <= 150) return 'B';
+      if(kwh <= 230) return 'C';
+      if(kwh <= 330) return 'D';
+      if(kwh <= 450) return 'E';
+      if(kwh <= 590) return 'F';
       return 'G';
     }
 
@@ -637,20 +639,22 @@
       }
 
       function updateEnergy() {
-        let sum = 2800, lines = [];  // Valeur de base à 2800 pour commencer en classe B
+        let sum = 120, lines = []; // Valeur de base à 120 kWh/an (classe B)
         Object.entries(selection).forEach(([cat]) => {
           const sw = document.querySelector(`.group[data-cat="${cat}"] .swatch.selected`);
           if(!sw) return;
           const col = sw.dataset.color;
-          const imp = energyImpact[cat][col] || 0;
-          sum += imp;
-          lines.push(`• ${cat} – ${sw.nextElementSibling.textContent}: ${imp>0?'+':''}${imp} kWh/an`);
+          const imp = energyImpact[cat][col] || 120;
+          sum += (imp - 120); // On soustrait la valeur de base pour avoir l'impact net
+          if (imp !== 120) {
+            lines.push(`• ${cat} – ${sw.nextElementSibling.textContent}: ${imp>120?'+':''}${imp-120} kWh/an`);
+          }
         });
 
         energyEl.textContent = `${sum} kWh/an`;
         const cls = getEnergyClass(sum);
         classEl.textContent = cls === 'Aplus' ? 'A+' : cls;
-        barFill.style.width = `${Math.min(100, Math.round(sum/4000*100))}%`;
+        barFill.style.width = `${Math.min(100, Math.round(sum/590*100))}%`;
         
         ratingBars.forEach(bar => {
           const rating = bar.dataset.rating;
@@ -661,7 +665,7 @@
         houseSvg.style.color = ratingColors[cls];
 
         document.getElementById('energy-details').innerHTML =
-          lines.length ? lines.join('<br>') : '<i>Aucun matériau sélectionné</i>';
+          lines.length ? lines.join('<br>') : '<i>Configuration de base</i>';
       }
 
       mv.addEventListener('load', () => {
