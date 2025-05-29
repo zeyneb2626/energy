@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Configuration Intemporel'home P4</title>
+  <title>Configuration Modern'home</title>
   <script type="module"
           src="https://unpkg.com/@google/model-viewer@1.12.0/dist/model-viewer.min.js">
   </script>
@@ -82,7 +82,6 @@
       border-radius: 4px;
       padding: 0 8px;
       color: white;
-      font-size: 0.9em;
       width: 85%;
       transition: all 0.3s ease-in-out;
       opacity: 0.7;
@@ -269,8 +268,8 @@
     <div class="viewer-card">
       <model-viewer
         id="mv"
-        src="INTEMPOREL21.glb"
-        alt="Maison Itemporel'home"
+        src="MODERNHOME9.glb"
+        alt="Maison Modern'home"
         exposure="0.6"
         shadow-intensity="2.5"
         shadow-softness="1"
@@ -361,19 +360,6 @@
                 stroke="currentColor"
                 stroke-width="6"
                 stroke-linecap="round"/>
-              
-              <g class="smoke">
-                <path
-                  d="M128,20 
-                     C132,18 134,16 132,14
-                     M132,15
-                     C136,13 138,11 136,9"
-                  fill="none"
-                  stroke="#999"
-                  stroke-width="1"
-                  stroke-linecap="round">
-                </path>
-              </g>
             </svg>
           </div>
 
@@ -581,11 +567,11 @@
       let selection = {};
 
       const targets = {
-        Menuiserie: ['acierpaint','acier','volets'],
+        Menuiserie: ['menui','volets'],
         Gouttiere:  ['gouttiere'],
-        Pergola:    ['structure'],
-        Murs:       ['murs','murs2'],
-        Toit:       ['toit01','toit02','toitpatio']
+        Pergola:    ['pergola'],
+        Murs:       ['murs'],
+        Toit:       ['toit']
       };
 
       function hex2rgba(h) {
