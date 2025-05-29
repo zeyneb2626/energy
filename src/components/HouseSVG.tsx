@@ -15,50 +15,79 @@ const HouseSVG: React.FC<HouseSVGProps> = ({ rating }) => {
       xmlns="http://www.w3.org/2000/svg"
       className="w-full h-full"
     >
-      {/* Background palm trees */}
-      <g transform="translate(20, 140) scale(0.8)">
-        <path
-          d="M0,0 C-2,0 -8,-35 -5,-40 C-2,-45 2,-45 5,-40 C8,-35 2,0 0,0 Z"
-          fill="#8B4513"
-          stroke="#654321"
-          strokeWidth="1"
-        />
-        {[0, 1, 2].map((i) => (
+      {/* Larger palm trees */}
+      {[
+        { x: 20, scale: 1, flip: false },
+        { x: 180, scale: -1, flip: true }
+      ].map((palm, index) => (
+        <g key={index} transform={`translate(${palm.x}, 140) scale(${palm.scale}, 1)`}>
+          {/* Trunk with texture */}
           <path
-            key={i}
-            d={`M0,${-30 - i * 5}
-               C-15,${-35 - i * 5} -25,${-30 - i * 5} -30,${-20 - i * 5}
-               C-20,${-25 - i * 5} -10,${-28 - i * 5} 0,${-30 - i * 5}
-               C10,${-28 - i * 5} 20,${-25 - i * 5} 30,${-20 - i * 5}
-               C25,${-30 - i * 5} 15,${-35 - i * 5} 0,${-30 - i * 5}`}
-            fill={`rgb(${34 + i * 20}, ${139 + i * 20}, ${34 + i * 20})`}
-            stroke="#006400"
+            d="M0,0 
+               C-3,0 -4,-45 -2,-50 
+               C-1,-52 1,-52 2,-50 
+               C4,-45 3,0 0,0"
+            fill="#8B4513"
+            stroke="#654321"
             strokeWidth="1"
           />
-        ))}
-      </g>
-
-      <g transform="translate(180, 140) scale(-0.8, 0.8)">
-        <path
-          d="M0,0 C-2,0 -8,-35 -5,-40 C-2,-45 2,-45 5,-40 C8,-35 2,0 0,0 Z"
-          fill="#8B4513"
-          stroke="#654321"
-          strokeWidth="1"
-        />
-        {[0, 1, 2].map((i) => (
-          <path
-            key={i}
-            d={`M0,${-30 - i * 5}
-               C-15,${-35 - i * 5} -25,${-30 - i * 5} -30,${-20 - i * 5}
-               C-20,${-25 - i * 5} -10,${-28 - i * 5} 0,${-30 - i * 5}
-               C10,${-28 - i * 5} 20,${-25 - i * 5} 30,${-20 - i * 5}
-               C25,${-30 - i * 5} 15,${-35 - i * 5} 0,${-30 - i * 5}`}
-            fill={`rgb(${34 + i * 20}, ${139 + i * 20}, ${34 + i * 20})`}
-            stroke="#006400"
-            strokeWidth="1"
-          />
-        ))}
-      </g>
+          {/* Trunk texture */}
+          {[...Array(5)].map((_, i) => (
+            <path
+              key={i}
+              d={`M-1,${-10 * i} 
+                  C-2,${-10 * i - 5} -1,${-10 * i - 8} 1,${-10 * i}`}
+              fill="none"
+              stroke="#654321"
+              strokeWidth="0.5"
+              opacity="0.5"
+            />
+          ))}
+          
+          {/* Palm leaves in multiple layers */}
+          {[...Array(5)].map((_, i) => (
+            <g key={i} transform={`translate(0, ${-45 - i * 3})`}>
+              {/* Left side leaves */}
+              <path
+                d={`M0,0 
+                    C-20,${-5 - i * 2} -35,${-8 - i * 2} -40,${-3 - i * 1}
+                    C-38,${-1 - i * 1} -35,${0 - i * 1} -30,${2 - i * 1}
+                    C-25,${1 - i * 1} -15,0 0,0`}
+                fill={`rgb(${34 + i * 15}, ${139 + i * 10}, ${34 + i * 15})`}
+                stroke="#006400"
+                strokeWidth="0.5"
+                transform={`rotate(${-20 - i * 15})`}
+              />
+              
+              {/* Right side leaves */}
+              <path
+                d={`M0,0 
+                    C20,${-5 - i * 2} 35,${-8 - i * 2} 40,${-3 - i * 1}
+                    C38,${-1 - i * 1} 35,${0 - i * 1} 30,${2 - i * 1}
+                    C25,${1 - i * 1} 15,0 0,0`}
+                fill={`rgb(${34 + i * 15}, ${139 + i * 10}, ${34 + i * 15})`}
+                stroke="#006400"
+                strokeWidth="0.5"
+                transform={`rotate(${20 + i * 15})`}
+              />
+            </g>
+          ))}
+          
+          {/* Coconuts */}
+          {[...Array(3)].map((_, i) => (
+            <g key={i} transform={`translate(${i * 2 - 2}, -45)`}>
+              <circle
+                cx="0"
+                cy="0"
+                r="1.5"
+                fill="#5D4037"
+                stroke="#4E342E"
+                strokeWidth="0.5"
+              />
+            </g>
+          ))}
+        </g>
+      ))}
 
       {/* Ground/terrain with texture */}
       <path
