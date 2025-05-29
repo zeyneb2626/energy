@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Configuration Intemporel'home P4</title>
+  <title>Configuration Tradi'home P4</title>
   <script type="module"
           src="https://unpkg.com/@google/model-viewer@1.12.0/dist/model-viewer.min.js">
   </script>
@@ -256,6 +256,16 @@
       model-viewer{ height:40vh!important; min-height:200px }
       .dimensions{grid-template-columns:1fr}
     }
+
+    @keyframes drift {
+      0% { transform: translateY(0); opacity: 0.6; }
+      50% { transform: translateY(-2px); opacity: 0.3; }
+      100% { transform: translateY(0); opacity: 0.6; }
+    }
+
+    .smoke path {
+      animation: drift 3s infinite ease-in-out;
+    }
   </style>
 </head>
 <body>
@@ -263,8 +273,8 @@
     <div class="viewer-card">
       <model-viewer
         id="mv"
-        src="INTEMPOREL21.glb"
-        alt="Maison Itemporel'home"
+        src="./TRADIHOME17.glb"
+        alt="Maison Tradi'home"
         exposure="0.6"
         shadow-intensity="2.5"
         shadow-softness="1"
@@ -337,15 +347,6 @@
                   stroke="#999"
                   stroke-width="1"
                   stroke-linecap="round">
-                  <animate
-                    attributeName="d"
-                    dur="3s"
-                    repeatCount="indefinite"
-                    values="
-                      M128,20 C132,18 134,16 132,14 M132,15 C136,13 138,11 136,9;
-                      M128,18 C134,16 136,14 132,12 M132,13 C138,11 140,9 136,7;
-                      M128,20 C132,18 134,16 132,14 M132,15 C136,13 138,11 136,9"
-                  />
                 </path>
               </g>
             </svg>
@@ -410,8 +411,31 @@
     </div>
 
     <div class="controls">
-      <h2>Configuration Modern'home</h2>
+      <h2>Configuration Tradi'home</h2>
 
+      <!-- Bardage -->
+      <div class="group" data-cat="Bardage">
+        <h3>Bardage extérieur</h3>
+        <div class="options">
+          <div class="option">
+            <div class="swatch" style="background-color:#C19A6B" data-color="#C19A6B" data-cost="520"></div>
+            <div class="option-label">Chêne clair</div>
+            <div class="option-price">+520 €</div>
+          </div>
+          <div class="option">
+            <div class="swatch" style="background-color:#8B5A2B" data-color="#8B5A2B" data-cost="790"></div>
+            <div class="option-label">Chêne foncé</div>
+            <div class="option-price">+790 €</div>
+          </div>
+          <div class="option">
+            <div class="swatch" style="background-color:#3D4C5C" data-color="#3D4C5C" data-cost="895"></div>
+            <div class="option-label">Gris oragé</div>
+            <div class="option-price">+895 €</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Menuiserie ALU -->
       <div class="group" data-cat="Menuiserie">
         <h3>Menuiserie ALU</h3>
         <div class="options">
@@ -428,6 +452,7 @@
         </div>
       </div>
 
+      <!-- Gouttière -->
       <div class="group" data-cat="Gouttiere">
         <h3>Gouttière et descente</h3>
         <div class="options">
@@ -439,6 +464,7 @@
         </div>
       </div>
 
+      <!-- Pergola -->
       <div class="group" data-cat="Pergola">
         <h3>Pergola bioclimatique</h3>
         <div class="options">
@@ -455,6 +481,7 @@
         </div>
       </div>
 
+      <!-- Peinture -->
       <div class="group" data-cat="Murs">
         <h3>Peinture (mur extérieur)</h3>
         <div class="options">
@@ -476,6 +503,7 @@
         </div>
       </div>
 
+      <!-- Toit -->
       <div class="group" data-cat="Toit">
         <h3>Tôle ondulée</h3>
         <div class="options">
@@ -497,6 +525,7 @@
         </div>
       </div>
 
+      <!-- Récapitulatif -->
       <div id="price-summary">
         <h3>Récapitulatif de prix</h3>
         <div class="line"><span>Prix de base :</span><span id="base-price">170 000 €</span></div>
@@ -513,11 +542,12 @@
 
   <script>
     const energyImpact = {
-      Toit:      {'#1A2E3F':3000,'#A6A6A6':3200,'#C0392B':3500},
-      Pergola:   {'#FFFFFF':-200,'#000000':300},
-      Murs:      {'#FFFFFF':0,'#D4C4A3':100,'#E6C7B1':150},
-      Menuiserie:{'#FFFFFF':0,'#000000':50},
-      Gouttiere: {'#FFFFFF':0}
+      Bardage:    {'#C19A6B':520,'#8B5A2B':790,'#3D4C5C':895},
+      Toit:       {'#1A2E3F':3000,'#A6A6A6':3200,'#C0392B':3500},
+      Pergola:    {'#FFFFFF':-200,'#000000':300},
+      Murs:       {'#FFFFFF':0,'#D4C4A3':100,'#E6C7B1':150},
+      Menuiserie: {'#FFFFFF':0,'#000000':50},
+      Gouttiere:  {'#FFFFFF':0}
     };
 
     const ratingColors = {
@@ -555,11 +585,12 @@
       let selection = {};
 
       const targets = {
-        Menuiserie: ['acierpaint','acier','volets'],
-        Gouttiere:  ['gouttiere'],
-        Pergola:    ['structure'],
-        Murs:       ['murs','murs2'],
-        Toit:       ['toit01','toit02','toitpatio']
+        Bardage:    ['poutrine01','poutrine02'],
+        Menuiserie: ['porte','cadre porte fenetre','volets','encadrement'],
+        Gouttiere:  ['goutieres'],
+        Pergola:    ['poutres','volet_pergola'],
+        Murs:       ['murs'],
+        Toit:       ['toit1','toit contour']
       };
 
       function hex2rgba(h) {
