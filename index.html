@@ -70,32 +70,35 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 2px;
     }
 
     .rating-bar {
       display: flex;
       align-items: center;
-      height: 32px;
+      height: 24px;
       border-radius: 4px;
       padding: 0 8px;
       color: white;
       opacity: 0.3;
       transition: opacity 0.4s ease;
+      font-size: 0.9em;
     }
 
     .rating-bar.active {
       opacity: 1;
+      transform: scale(1.05);
+      transition: all 0.3s ease;
     }
 
     .rating-label {
       font-weight: bold;
-      margin-right: 12px;
-      min-width: 30px;
+      margin-right: 8px;
+      min-width: 25px;
     }
 
     .rating-value {
-      font-size: 0.9em;
+      font-size: 0.85em;
     }
 
     .rating-A-plus { background-color: #1B5E20; }
@@ -542,12 +545,12 @@
 
   <script>
     const energyImpact = {
-      Bardage:    {'#C19A6B':520,'#8B5A2B':790,'#3D4C5C':895},
-      Toit:       {'#1A2E3F':3000,'#A6A6A6':3200,'#C0392B':3500},
-      Pergola:    {'#FFFFFF':-200,'#000000':300},
-      Murs:       {'#FFFFFF':0,'#D4C4A3':100,'#E6C7B1':150},
-      Menuiserie: {'#FFFFFF':0,'#000000':50},
-      Gouttiere:  {'#FFFFFF':0}
+      Bardage:    {'#C19A6B':2800,'#8B5A2B':2900,'#3D4C5C':3100},
+      Toit:       {'#1A2E3F':2800,'#A6A6A6':2900,'#C0392B':3200},
+      Pergola:    {'#FFFFFF':2700,'#000000':3000},
+      Murs:       {'#FFFFFF':2800,'#D4C4A3':2900,'#E6C7B1':3000},
+      Menuiserie: {'#FFFFFF':2800,'#000000':2900},
+      Gouttiere:  {'#FFFFFF':2800}
     };
 
     const ratingColors = {
@@ -619,14 +622,12 @@
         classEl.textContent = cls === 'Aplus' ? 'A+' : cls;
         barFill.style.width = `${Math.min(100, Math.round(sum/4000*100))}%`;
         
-        // Update rating bars
         ratingBars.forEach(bar => {
           const rating = bar.dataset.rating;
           bar.classList.toggle('active', 
             (rating === 'A+' && cls === 'Aplus') || rating === cls);
         });
 
-        // Update house color
         houseSvg.style.color = ratingColors[cls];
 
         document.getElementById('energy-details').innerHTML =
