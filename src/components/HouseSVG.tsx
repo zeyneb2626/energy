@@ -15,6 +15,66 @@ const HouseSVG: React.FC<HouseSVGProps> = ({ rating }) => {
       xmlns="http://www.w3.org/2000/svg"
       className="w-full h-full"
     >
+      {/* Palm tree left */}
+      <g transform="translate(20, 140) scale(0.8)">
+        <path
+          d="M0,0 L-5,-30 C-5,-35 5,-35 5,-30 L0,0"
+          fill="#8B4513"
+          stroke="#654321"
+          strokeWidth="1"
+        />
+        <path
+          d="M0,-30
+             C-15,-35 -25,-30 -30,-20
+             C-20,-25 -10,-28 0,-30
+             C10,-28 20,-25 30,-20
+             C25,-30 15,-35 0,-30"
+          fill="#228B22"
+          stroke="#006400"
+          strokeWidth="1"
+        />
+        <path
+          d="M0,-25
+             C-12,-28 -20,-25 -25,-15
+             C-15,-20 -8,-23 0,-25
+             C8,-23 15,-20 25,-15
+             C20,-25 12,-28 0,-25"
+          fill="#32CD32"
+          stroke="#228B22"
+          strokeWidth="1"
+        />
+      </g>
+
+      {/* Palm tree right */}
+      <g transform="translate(180, 140) scale(-0.8, 0.8)">
+        <path
+          d="M0,0 L-5,-30 C-5,-35 5,-35 5,-30 L0,0"
+          fill="#8B4513"
+          stroke="#654321"
+          strokeWidth="1"
+        />
+        <path
+          d="M0,-30
+             C-15,-35 -25,-30 -30,-20
+             C-20,-25 -10,-28 0,-30
+             C10,-28 20,-25 30,-20
+             C25,-30 15,-35 0,-30"
+          fill="#228B22"
+          stroke="#006400"
+          strokeWidth="1"
+        />
+        <path
+          d="M0,-25
+             C-12,-28 -20,-25 -25,-15
+             C-15,-20 -8,-23 0,-25
+             C8,-23 15,-20 25,-15
+             C20,-25 12,-28 0,-25"
+          fill="#32CD32"
+          stroke="#228B22"
+          strokeWidth="1"
+        />
+      </g>
+
       {/* Base/Foundation */}
       <path
         d="M35,140 L165,140"
