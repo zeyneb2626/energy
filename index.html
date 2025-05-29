@@ -68,18 +68,21 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 1px;
+      transform: scale(0.85);
+      transform-origin: left;
+      margin: -10px 0;
     }
 
     .rating-bar {
       position: relative;
       display: flex;
       align-items: center;
-      height: 32px;
-      margin-bottom: 4px;
-      padding: 0 12px;
+      height: 24px;
+      margin-bottom: 2px;
+      padding: 0 8px;
       color: white;
-      clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 0 100%);
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%);
       transition: all 0.3s ease;
       width: 85%;
     }
@@ -178,34 +181,42 @@
       border-radius: 8px;
       padding: 1.5rem;
       margin: 1rem 0 2rem;
-      text-align: center;
       border: 1px solid #e2e8f0;
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
 
     .price-total {
-      font-size: 2.5rem;
+      font-size: 2rem;
       font-weight: bold;
       color: #1a202c;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1rem;
     }
 
-    .price-details {
+    .price-breakdown {
       display: flex;
-      justify-content: center;
-      gap: 2rem;
-      color: #64748b;
-      font-size: 0.95rem;
+      flex-direction: column;
+      gap: 0.5rem;
+      font-size: 0.9rem;
     }
 
     .price-item {
       display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      justify-content: space-between;
+      padding: 0.25rem 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .price-item:last-child {
+      border-bottom: none;
     }
 
     .price-label {
-      color: #94a3b8;
+      color: #64748b;
+    }
+
+    .price-value {
+      font-weight: 500;
+      color: #1a202c;
     }
 
     .group { margin-bottom:1.5rem }
@@ -402,15 +413,12 @@
 
       <div class="price-display">
         <div class="price-total" id="total-price">170 000 €</div>
-        <div class="price-details">
+        <div class="price-breakdown" id="price-breakdown">
           <div class="price-item">
-            <span class="price-label">Prix de base :</span>
-            <span id="base-price">170 000 €</span>
+            <span class="price-label">Prix de base</span>
+            <span class="price-value">170 000 €</span>
           </div>
-          <div class="price-item">
-            <span class="price-label">Options :</span>
-            <span id="opt-price">0 €</span>
-          </div>
+          <!-- Dynamic price items will be added here -->
         </div>
       </div>
 
@@ -622,6 +630,28 @@
           lines.length ? lines.join('<br>') : '<i>Aucun matériau sélectionné</i>';
       }
 
+      function updatePriceBreakdown() {
+        const breakdown = document.getElementById('price-breakdown');
+        const items = ['<div class="price-item"><span class="price-label">Prix de base</span><span class="price-value">170 000 €</span></div>'];
+        
+        Object.entries(selection).forEach(([cat]) => {
+          const sw = document.querySelector(`.group[data-cat="${cat}"] .swatch.selected`);
+          if(!sw) return;
+          const cost = +sw.dataset.cost;
+          if(cost > 0) {
+            const label = sw.nextElementSibling.textContent;
+            items.push(`
+              <div class="price-item">
+                <span class="price-label">${cat} - ${label}</span>
+                <span class="price-value">+${cost.toLocaleString('fr-FR')} €</span>
+              </div>
+            `);
+          }
+        });
+        
+        breakdown.innerHTML = items.join('');
+      }
+
       mv.addEventListener('load', () => {
         const mats = mv.model.materials;
         document.querySelectorAll('.group').forEach(group => {
@@ -635,6 +665,7 @@
               const tot = Object.values(selection).reduce((a,b) => a+b, 0);
               optEl.textContent = `${tot.toLocaleString('fr-FR')} €`;
               totalEl.textContent = `${(basePrice+tot).toLocaleString('fr-FR')} €`;
+              updatePriceBreakdown();
               const rgba = hex2rgba(sw.dataset.color);
               mats.forEach(m => {
                 const name = m.name.toLowerCase();
