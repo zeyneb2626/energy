@@ -177,6 +177,143 @@
       color:#666;
     }
 
+    .controls {
+      background:#fff;
+      border-radius:8px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.1);
+      padding:1.5rem;
+      overflow-y:auto;
+    }
+
+    .controls h2 {
+      font-size:1.5rem;
+      color:#222;
+      margin-bottom:1.5rem;
+    }
+
+    .group {
+      margin-bottom:1.5rem;
+    }
+
+    .group h3 {
+      font-size:1.1rem;
+      color:#333;
+      margin-bottom:1rem;
+    }
+
+    .options {
+      display:flex;
+      gap:1rem;
+      flex-wrap:wrap;
+    }
+
+    .option {
+      text-align:center;
+      width:70px;
+    }
+
+    .swatch {
+      width:100%;
+      aspect-ratio:1;
+      border:2px solid #ddd;
+      border-radius:4px;
+      cursor:pointer;
+      position:relative;
+      transition:all 0.2s;
+    }
+
+    .swatch:hover {
+      border-color:#999;
+      transform:translateY(-2px);
+    }
+
+    .swatch.selected {
+      border-color:#2E7D32;
+    }
+
+    .swatch.selected::after {
+      content:'✓';
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%, -50%);
+      color:#fff;
+      text-shadow:0 1px 2px rgba(0,0,0,0.4);
+      font-size:1.2rem;
+    }
+
+    .option-label {
+      margin-top:0.5rem;
+      font-size:0.75rem;
+      color:#444;
+    }
+
+    .option-price {
+      font-size:0.7rem;
+      color:#666;
+    }
+
+    #price-summary {
+      background:#fff;
+      border:1px solid #eee;
+      border-radius:6px;
+      padding:1rem;
+      margin:1.5rem 0;
+    }
+
+    #price-summary h3 {
+      font-size:1rem;
+      margin-bottom:1rem;
+    }
+
+    #price-summary .line {
+      display:flex;
+      justify-content:space-between;
+      margin-bottom:0.5rem;
+      font-size:0.9rem;
+    }
+
+    #price-summary .line.total {
+      font-weight:700;
+      font-size:1.1rem;
+      margin-top:0.5rem;
+      padding-top:0.5rem;
+      border-top:1px solid #eee;
+    }
+
+    .action-buttons {
+      display:flex;
+      gap:1rem;
+    }
+
+    .action-buttons button {
+      flex:1;
+      padding:0.75rem;
+      font-size:0.95rem;
+      border:none;
+      border-radius:4px;
+      cursor:pointer;
+      transition:all 0.2s;
+    }
+
+    .btn-save {
+      background:#f0f0f0;
+      color:#333;
+    }
+
+    .btn-save:hover {
+      background:#e0e0e0;
+    }
+
+    .btn-quote {
+      background:#2E7D32;
+      color:#fff;
+    }
+
+    .btn-quote:hover {
+      background:#1B5E20;
+    }
+
     @keyframes drift {
       0% { transform:translateY(0); opacity:0.6; }
       50% { transform:translateY(-1px); opacity:0.3; }
@@ -300,6 +437,118 @@
         <div class="dim-card"><strong>85 m²</strong><span>Surface</span></div>
         <div class="dim-card"><strong>3 Ch</strong><span>Chambres</span></div>
         <div class="dim-card"><strong>2 SdE</strong><span>Salles d'eau</span></div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <h2>Configuration Modern'home</h2>
+
+      <div class="group" data-cat="Toit">
+        <h3>Tôle ondulée</h3>
+        <div class="options">
+          <div class="option">
+            <div class="swatch" style="background-color:#1A2E3F" data-color="#1A2E3F" data-cost="0">
+            </div>
+            <div class="option-label">Bleu Ardoise</div>
+            <div class="option-price">+0 €</div>
+          </div>
+          <div class="option">
+            <div class="swatch" style="background-color:#A6A6A6" data-color="#A6A6A6" data-cost="0">
+            </div>
+            <div class="option-label">Gris Acier</div>
+            <div class="option-price">+0 €</div>
+          </div>
+          <div class="option">
+            <div class="swatch" style="background-color:#C0392B" data-color="#C0392B" data-cost="1800">
+            </div>
+            <div class="option-label">Rouge Hibiscus</div>
+            <div class="option-price">+1 800 €</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="group" data-cat="Menuiserie">
+        <h3>Menuiserie ALU</h3>
+        <div class="options">
+          <div class="option">
+            <div class="swatch" style="background-color:#FFFFFF" data-color="#FFFFFF" data-cost="0">
+            </div>
+            <div class="option-label">Blanc</div>
+            <div class="option-price">+0 €</div>
+          </div>
+          <div class="option">
+            <div class="swatch" style="background-color:#000000" data-color="#000000" data-cost="2499">
+            </div>
+            <div class="option-label">Noir</div>
+            <div class="option-price">+2 499 €</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="group" data-cat="Gouttiere">
+        <h3>Gouttière et descente</h3>
+        <div class="options">
+          <div class="option">
+            <div class="swatch" style="background-color:#FFFFFF" data-color="#FFFFFF" data-cost="0">
+            </div>
+            <div class="option-label">Blanc</div>
+            <div class="option-price">+0 €</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="group" data-cat="Pergola">
+        <h3>Pergola bioclimatique</h3>
+        <div class="options">
+          <div class="option">
+            <div class="swatch" style="background-color:#FFFFFF" data-color="#FFFFFF" data-cost="8500">
+            </div>
+            <div class="option-label">Blanc</div>
+            <div class="option-price">+8 500 €</div>
+          </div>
+          <div class="option">
+            <div class="swatch" style="background-color:#000000" data-color="#000000" data-cost="9500">
+            </div>
+            <div class="option-label">Noir</div>
+            <div class="option-price">+9 500 €</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="group" data-cat="Murs">
+        <h3>Peinture (mur extérieur)</h3>
+        <div class="options">
+          <div class="option">
+            <div class="swatch" style="background-color:#FFFFFF" data-color="#FFFFFF" data-cost="0">
+            </div>
+            <div class="option-label">Blanc</div>
+            <div class="option-price">+0 €</div>
+          </div>
+          <div class="option">
+            <div class="swatch" style="background-color:#D4C4A3" data-color="#D4C4A3" data-cost="999">
+            </div>
+            <div class="option-label">Beige WES</div>
+            <div class="option-price">+999 €</div>
+          </div>
+          <div class="option">
+            <div class="swatch" style="background-color:#E6C7B1" data-color="#E6C7B1" data-cost="1499">
+            </div>
+            <div class="option-label">Ocre Mojave</div>
+            <div class="option-price">+1 499 €</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="price-summary">
+        <h3>Récapitulatif de prix</h3>
+        <div class="line"><span>Prix de base :</span><span id="base-price">170 000 €</span></div>
+        <div class="line"><span>Vos options :</span><span id="opt-price">0 €</span></div>
+        <div class="line total"><span>Total TTC :</span><span id="total-price">170 000 €</span></div>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn-save">Enregistrer la configuration</button>
+        <button class="btn-quote">Demander un devis</button>
       </div>
     </div>
   </div>
