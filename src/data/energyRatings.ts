@@ -10,3 +10,7 @@ export const energyRatings: EnergyRatingInfo[] = [
   { id: 'F', color: '#FF9800', range: '451 à 590', threshold: 2 },
   { id: 'G', color: '#F44336', range: '> 590', threshold: 0 }
 ];
+
+export const getInitialRating = (): EnergyRatingInfo => {
+  return energyRatings.find(rating => rating.id === 'B') || energyRatings[2];
+};
