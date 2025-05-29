@@ -17,15 +17,16 @@ const HouseSVG: React.FC<HouseSVGProps> = ({ rating }) => {
     >
       {/* House outline matching reference image exactly */}
       <path
-        d="M80,180 
-           L80,100 
-           L120,60 
-           L120,100 
-           L160,100"
+        d="M100,40 
+           L100,100 
+           L140,100 
+           L140,140 
+           L100,140 
+           L100,180"
         fill="none"
         className="energy-rating-transition"
         stroke={color}
-        strokeWidth="12"
+        strokeWidth="14"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
