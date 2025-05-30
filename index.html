@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Configuration Modern'home</title>
-  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <title>Configuration Intemporel'home P4</title>
+  <script type="module" src="https://unpkg.com/@google/model-viewer@1.12.0/dist/model-viewer.min.js"></script>
   <style>
     * { box-sizing:border-box; margin:0; padding:0 }
     html, body { height:100%; font-family:sans-serif; background:#f0f2f5 }
@@ -222,38 +222,6 @@
       margin-bottom: 2rem;
     }
 
-    .price-display {
-      background: #f8fafc;
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin-top: 2rem;
-      border: 1px solid #e2e8f0;
-    }
-
-    .price-breakdown {
-      margin-top: 1rem;
-    }
-
-    .price-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 0.5rem 0;
-      border-bottom: 1px solid #e2e8f0;
-    }
-
-    .price-item:last-child {
-      border-bottom: none;
-    }
-
-    .price-label {
-      color: #64748b;
-    }
-
-    .price-value {
-      font-weight: 500;
-      color: #1a202c;
-    }
-
     .group { margin-bottom: 1.5rem; }
     .group h3 {
       font-size: 1.1rem;
@@ -295,6 +263,38 @@
 
     .option-label { margin-top: .3rem; font-size: .75rem; color: #444; }
     .option-price { font-size: .7rem; color: #666; }
+
+    .price-display {
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      border: 1px solid #e2e8f0;
+    }
+
+    .price-breakdown {
+      margin-top: 1rem;
+    }
+
+    .price-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .price-item:last-child {
+      border-bottom: none;
+    }
+
+    .price-label {
+      color: #64748b;
+    }
+
+    .price-value {
+      font-weight: 500;
+      color: #1a202c;
+    }
 
     .action-buttons {
       display: flex;
@@ -349,8 +349,8 @@
     <div class="viewer-card">
       <model-viewer
         id="mv"
-         src="./TRADIHOME33.glb"
-        alt="Maison Tradi'home"
+        src="INTEMPOREL21.glb"
+        alt="Maison Intemporel'home"
         exposure="0.6"
         shadow-intensity="2.5"
         shadow-softness="1"
@@ -448,9 +448,9 @@
     </div>
 
     <div class="controls">
-      <h2>Configuration Modern'home</h2>
+      <h2>Configuration Intemporel'home</h2>
       <div class="current-price" id="total-price">170 000 €</div>
-   <!-- Bardage -->
+
       <div class="group" data-cat="Bardage">
         <h3>Bardage extérieur</h3>
         <div class="options">
@@ -627,7 +627,7 @@
         }
       });
 
-       const targets = {
+      const targets = {
         Bardage:    ['poutrine01'],
         Menuiserie: ['porte','cadre porte fenetre','volets','encadrement'],
         Gouttiere:  ['goutieres'],
