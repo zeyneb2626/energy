@@ -350,13 +350,16 @@
       <model-viewer
         id="mv"
         src="INTEMPOREL21.glb"
-        alt="Maison Intemporel'home"
+        alt="Maison Itemporel'home"
         exposure="0.6"
         shadow-intensity="2.5"
         shadow-softness="1"
         camera-controls
-        min-camera-orbit="0deg 0deg auto"
-        max-camera-orbit="360deg 90deg auto">
+        min-camera-orbit="-infinity deg 0deg auto"
+        max-camera-orbit="infinity deg 90deg auto"
+        camera-target="0m 1m 0m"
+        orbit-sensitivity="1"
+        interaction-prompt="none">
       </model-viewer>
 
       <div id="energy-summary">
