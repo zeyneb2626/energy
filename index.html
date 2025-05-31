@@ -20,32 +20,28 @@
       background-color: #1a1a1a;
       color: #ffffff;
       padding: 4rem 2rem;
-      text-align: center;
     }
 
     .footer-container {
       max-width: 1200px;
       margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3rem;
     }
 
     .footer-content {
-      max-width: 600px;
-      margin-bottom: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+      margin-bottom: 4rem;
     }
 
     .footer-description {
       color: #e5e5e5;
-      margin-bottom: 2rem;
       line-height: 1.8;
+      margin-bottom: 2rem;
     }
 
     .footer-contact {
       color: #e5e5e5;
-      margin-bottom: 2rem;
       line-height: 1.6;
     }
 
@@ -56,20 +52,19 @@
     }
 
     .footer-contact a:hover {
-      color: #9BA1A9;
+      color: #B5A69C;
     }
 
     .footer-social {
       display: flex;
       gap: 1.5rem;
-      margin-bottom: 3rem;
-      justify-content: center;
+      margin: 2rem 0;
     }
 
     .social-icon {
       width: 40px;
       height: 40px;
-      background: #9BA1A9;
+      background: #B5A69C;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -78,35 +73,39 @@
     }
 
     .social-icon:hover {
-      background: #7f8690;
+      background: #9a8c82;
       transform: translateY(-2px);
     }
 
     .cta-button {
       display: inline-block;
-      background-color: #9BA1A9;
+      background-color: #B5A69C;
       color: #ffffff;
       padding: 1rem 2rem;
       border-radius: 8px;
       text-decoration: none;
       font-weight: 600;
       transition: all 0.3s ease;
-      margin-top: 1rem;
     }
 
     .cta-button:hover {
-      background-color: #7f8690;
+      background-color: #9a8c82;
       transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 3rem;
+      border-top: 1px solid #333;
     }
 
     .footer-logo {
       width: 120px;
       height: auto;
-      margin-top: 3rem;
+      margin-bottom: 2rem;
     }
 
     .footer-copyright {
-      margin-top: 2rem;
       color: #9BA1A9;
       font-size: 0.9rem;
     }
@@ -116,13 +115,17 @@
         padding: 3rem 1.5rem;
       }
       
-      .footer-container {
-        gap: 2rem;
+      .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
       }
 
-      .footer-logo {
-        width: 100px;
-        margin-top: 2rem;
+      .footer-social {
+        justify-content: center;
+      }
+
+      .footer-bottom {
+        padding-top: 2rem;
       }
     }
   </style>
@@ -131,37 +134,44 @@
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-content">
-        <div class="footer-description">
-          Merci de votre visite sur notre site. Luly Homes, votre constructeur de maisons à ossature métallique en Guadeloupe, s'engage à vous accompagner dans la réalisation de votre projet de construction. N'hésitez pas à nous contacter pour en savoir plus sur nos solutions innovantes.
-        </div>
-        
-        <div class="footer-contact">
-          <p>Agence : Jabrun, Baie-Mahault,<br>Guadeloupe</p>
-          <p>Email: <a href="mailto:hello@luly-homes.com">hello@luly-homes.com</a></p>
+        <div>
+          <div class="footer-description">
+            Merci de votre visite sur notre site. Luly Homes, votre constructeur de maisons à ossature métallique en Guadeloupe, s'engage à vous accompagner dans la réalisation de votre projet de construction. N'hésitez pas à nous contacter pour en savoir plus sur nos solutions innovantes.
+          </div>
+          
+          <div class="footer-contact">
+            <p>Agence : Jabrun, Baie-Mahault,<br>Guadeloupe</p>
+            <p>Email: <a href="mailto:hello@luly-homes.com">hello@luly-homes.com</a></p>
+          </div>
+
+          <div class="footer-social">
+            <a href="https://facebook.com" class="social-icon" aria-label="Facebook">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+              </svg>
+            </a>
+            <a href="https://instagram.com" class="social-icon" aria-label="Instagram">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+          </div>
         </div>
 
-        <div class="footer-social">
-          <a href="https://facebook.com" class="social-icon" aria-label="Facebook">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-            </svg>
-          </a>
-          <a href="https://instagram.com" class="social-icon" aria-label="Instagram">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-            </svg>
-          </a>
+        <div>
+          <h3 class="text-xl font-semibold mb-4">Prenez rendez-vous</h3>
+          <p class="mb-4">Réservez un rendez-vous pour discuter avec un de nos experts de votre projet de construction.</p>
+          <a href="https://calendly.com/lulyhomes/30min" class="cta-button">Réserver un rendez-vous</a>
         </div>
-
-        <a href="https://calendly.com/lulyhomes/30min" class="cta-button">Réserver un rendez-vous</a>
       </div>
 
-      <img src="https://cdn.prod.website-files.com/6790a2bd4da09d1d111023d8/67bd87570c2addfcc390e59a_Luly%20Logo%20Finalise%CC%81_LULY%20PUCE%203D%20MARRON.png" alt="Luly Homes Logo" class="footer-logo">
-      
-      <div class="footer-copyright">
-        © 2025 Luly Homes. Tous droits réservés.
+      <div class="footer-bottom">
+        <img src="https://cdn.prod.website-files.com/6790a2bd4da09d1d111023d8/67bd87570c2addfcc390e59a_Luly%20Logo%20Finalise%CC%81_LULY%20PUCE%203D%20MARRON.png" alt="Luly Homes Logo" class="footer-logo">
+        <div class="footer-copyright">
+          © 2025 Luly Homes. Tous droits réservés.
+        </div>
       </div>
     </div>
   </footer>
