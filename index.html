@@ -19,21 +19,43 @@
     .footer {
       background-color: #1a1a1a;
       color: #ffffff;
-      padding: 4rem 2rem;
+      padding: 6rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
     }
 
     .footer-container {
       max-width: 1200px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 4rem;
     }
 
     .footer-logo {
-      width: 120px;
+      width: 180px;
       height: auto;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
+      transition: opacity 0.3s ease;
+    }
+
+    .footer-logo:hover {
+      opacity: 0.9;
+    }
+
+    .footer-section {
+      display: flex;
+      flex-direction: column;
     }
 
     .footer-section h3 {
@@ -41,47 +63,86 @@
       font-size: 1.25rem;
       margin-bottom: 1.5rem;
       font-weight: 600;
+      position: relative;
+      padding-bottom: 0.75rem;
+    }
+
+    .footer-section h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: #9BA1A9;
     }
 
     .footer-contact {
       color: #e5e5e5;
-      line-height: 1.6;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .footer-contact p {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
     }
 
     .footer-contact a {
       color: #ffffff;
       text-decoration: none;
       transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .footer-contact a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: #9BA1A9;
+      transition: width 0.3s ease;
     }
 
     .footer-contact a:hover {
       color: #9BA1A9;
     }
 
+    .footer-contact a:hover::after {
+      width: 100%;
+    }
+
     .footer-social {
       display: flex;
-      gap: 1rem;
+      gap: 1.25rem;
       margin-top: 1.5rem;
     }
 
     .social-icon {
-      width: 40px;
-      height: 40px;
-      background: #333;
+      width: 44px;
+      height: 44px;
+      background: rgba(255,255,255,0.1);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: all 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.1);
     }
 
     .social-icon:hover {
       background: #9BA1A9;
       transform: translateY(-2px);
+      border-color: #9BA1A9;
     }
 
     .cta-button {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
       background-color: #9BA1A9;
       color: #ffffff;
       padding: 1rem 2rem;
@@ -90,6 +151,21 @@
       font-weight: 600;
       transition: all 0.3s ease;
       margin-top: 1rem;
+      gap: 0.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.1);
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
     }
 
     .cta-button:hover {
@@ -97,19 +173,41 @@
       transform: translateY(-2px);
     }
 
+    .cta-button:hover::before {
+      transform: translateX(0);
+    }
+
+    .footer-bottom {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+      color: #9BA1A9;
+      font-size: 0.875rem;
+    }
+
     @media (max-width: 768px) {
       .footer {
-        padding: 3rem 1.5rem;
+        padding: 4rem 1.5rem;
       }
       
       .footer-container {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 3rem;
         text-align: center;
       }
 
       .footer-logo {
-        margin: 0 auto 1.5rem;
+        margin: 0 auto 2rem;
+      }
+
+      .footer-section h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .footer-contact p {
+        justify-content: center;
       }
 
       .footer-social {
@@ -122,10 +220,24 @@
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-section">
-        <img src="/logo-white.png" alt="Luly Homes Logo" class="footer-logo">
+        <img src="https://cdn.prod.website-files.com/6790a2bd4da09d1d111023d8/67bd87570c2addfcc390e59a_Luly%20Logo%20Finalise%CC%81_LULY%20PUCE%203D%20MARRON.png" 
+             alt="Luly Homes Logo" 
+             class="footer-logo">
         <div class="footer-contact">
-          <p>Agence : Jabrun, Baie-Mahault,<br>Guadeloupe</p>
-          <p>Email: <a href="mailto:hello@luly-homes.com">hello@luly-homes.com</a></p>
+          <p>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            Agence : Jabrun, Baie-Mahault,<br>Guadeloupe
+          </p>
+          <p>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <a href="mailto:hello@luly-homes.com">hello@luly-homes.com</a>
+          </p>
         </div>
         <div class="footer-social">
           <a href="https://facebook.com" class="social-icon" aria-label="Facebook">
@@ -144,10 +256,32 @@
       </div>
 
       <div class="footer-section">
-        <h3>Prenez rendez-vous</h3>
-        <p>Réservez un rendez-vous pour discuter avec un de nos expert de votre projet.</p>
-        <a href="https://calendly.com/lulyhomes/30min" class="cta-button">Réserver un rendez-vous</a>
+        <h3>Nos Services</h3>
+        <div class="footer-contact">
+          <p>Construction de maisons</p>
+          <p>Rénovation</p>
+          <p>Conseil en immobilier</p>
+          <p>Design d'intérieur</p>
+        </div>
       </div>
+
+      <div class="footer-section">
+        <h3>Prenez rendez-vous</h3>
+        <p style="color: #e5e5e5; margin-bottom: 1.5rem;">Réservez un rendez-vous pour discuter avec un de nos experts de votre projet.</p>
+        <a href="https://calendly.com/lulyhomes/30min" class="cta-button">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          Réserver un rendez-vous
+        </a>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>© 2024 Luly Homes. Tous droits réservés.</p>
     </div>
   </footer>
 </body>
