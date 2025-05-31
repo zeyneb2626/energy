@@ -27,43 +27,48 @@
       margin: 0 auto;
     }
 
-    .footer-content {
+    .footer-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 3rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 4rem;
       margin-bottom: 4rem;
     }
 
-    .footer-description {
-      color: #e5e5e5;
+    .footer-text {
+      font-size: 1.1rem;
       line-height: 1.8;
+      color: #e5e5e5;
       margin-bottom: 2rem;
     }
 
     .footer-contact {
       color: #e5e5e5;
-      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .footer-contact p {
+      margin-bottom: 0.5rem;
     }
 
     .footer-contact a {
-      color: #ffffff;
+      color: #B5A69C;
       text-decoration: none;
       transition: color 0.3s ease;
     }
 
     .footer-contact a:hover {
-      color: #B5A69C;
+      color: #ffffff;
     }
 
     .footer-social {
       display: flex;
-      gap: 1.5rem;
-      margin: 2rem 0;
+      gap: 1rem;
+      margin-bottom: 2rem;
     }
 
     .social-icon {
-      width: 40px;
-      height: 40px;
+      width: 45px;
+      height: 45px;
       background: #B5A69C;
       border-radius: 50%;
       display: flex;
@@ -73,36 +78,64 @@
     }
 
     .social-icon:hover {
+      transform: translateY(-3px);
       background: #9a8c82;
-      transform: translateY(-2px);
+    }
+
+    .social-icon svg {
+      width: 24px;
+      height: 24px;
+      color: #1a1a1a;
+    }
+
+    .cta-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .cta-title {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .cta-text {
+      font-size: 1.1rem;
+      color: #e5e5e5;
+      margin-bottom: 2rem;
     }
 
     .cta-button {
       display: inline-block;
       background-color: #B5A69C;
-      color: #ffffff;
+      color: #1a1a1a;
       padding: 1rem 2rem;
       border-radius: 8px;
       text-decoration: none;
       font-weight: 600;
+      font-size: 1.1rem;
       transition: all 0.3s ease;
+      text-align: center;
+      max-width: 300px;
     }
 
     .cta-button:hover {
-      background-color: #9a8c82;
+      background-color: #ffffff;
       transform: translateY(-2px);
     }
 
     .footer-bottom {
-      text-align: center;
-      padding-top: 3rem;
+      padding-top: 2rem;
       border-top: 1px solid #333;
+      text-align: center;
     }
 
     .footer-logo {
-      width: 120px;
+      width: 100px;
       height: auto;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
 
     .footer-copyright {
@@ -114,9 +147,13 @@
       .footer {
         padding: 3rem 1.5rem;
       }
-      
-      .footer-content {
+
+      .footer-grid {
         grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .footer-text, .footer-contact, .cta-section {
         text-align: center;
       }
 
@@ -124,8 +161,12 @@
         justify-content: center;
       }
 
-      .footer-bottom {
-        padding-top: 2rem;
+      .cta-button {
+        margin: 0 auto;
+      }
+
+      .cta-title {
+        font-size: 1.75rem;
       }
     }
   </style>
@@ -133,25 +174,25 @@
 <body>
   <footer class="footer">
     <div class="footer-container">
-      <div class="footer-content">
+      <div class="footer-grid">
         <div>
-          <div class="footer-description">
+          <div class="footer-text">
             Merci de votre visite sur notre site. Luly Homes, votre constructeur de maisons à ossature métallique en Guadeloupe, s'engage à vous accompagner dans la réalisation de votre projet de construction. N'hésitez pas à nous contacter pour en savoir plus sur nos solutions innovantes.
           </div>
           
           <div class="footer-contact">
-            <p>Agence : Jabrun, Baie-Mahault,<br>Guadeloupe</p>
+            <p>Agence : Jabrun, Baie-Mahault, Guadeloupe</p>
             <p>Email: <a href="mailto:hello@luly-homes.com">hello@luly-homes.com</a></p>
           </div>
 
           <div class="footer-social">
             <a href="https://facebook.com" class="social-icon" aria-label="Facebook">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
               </svg>
             </a>
             <a href="https://instagram.com" class="social-icon" aria-label="Instagram">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
@@ -160,9 +201,9 @@
           </div>
         </div>
 
-        <div>
-          <h3 class="text-xl font-semibold mb-4">Prenez rendez-vous</h3>
-          <p class="mb-4">Réservez un rendez-vous pour discuter avec un de nos experts de votre projet de construction.</p>
+        <div class="cta-section">
+          <h2 class="cta-title">Prenez rendez-vous</h2>
+          <p class="cta-text">Réservez un rendez-vous pour discuter avec un de nos experts de votre projet de construction.</p>
           <a href="https://calendly.com/lulyhomes/30min" class="cta-button">Réserver un rendez-vous</a>
         </div>
       </div>
