@@ -95,11 +95,22 @@
             cursor: pointer;
             width: 100%;
             transition: all 0.3s ease;
+            margin-bottom: 1rem;
         }
 
         button:hover {
             background: #004999;
             transform: translateY(-2px);
+        }
+
+        button.secondary {
+            background: #f5f5f7;
+            color: #1d1d1f;
+            border: 2px solid #e5e5e5;
+        }
+
+        button.secondary:hover {
+            background: #e5e5e7;
         }
 
         .result {
@@ -132,6 +143,12 @@
         .result-details {
             color: #86868b;
             font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .buttons-group {
+            display: flex;
+            gap: 1rem;
         }
 
         @keyframes slideUp {
@@ -156,6 +173,10 @@
 
             h1 {
                 font-size: 2rem;
+            }
+
+            .buttons-group {
+                flex-direction: column;
             }
         }
     </style>
@@ -191,10 +212,19 @@
                 <div class="result-title">Votre capacité d'emprunt maximale</div>
                 <div class="result-amount" id="loanAmount">0 €</div>
                 <div class="result-details" id="monthlyPayment">Mensualité estimée : 0 €</div>
+                <div class="buttons-group">
+                    <button onclick="downloadPDF()" class="secondary">
+                        Télécharger en PDF
+                    </button>
+                    <button onclick="calculateLoan()" class="secondary">
+                        Recalculer
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
         function calculateLoan() {
             const income = parseFloat(document.getElementById('income').value) || 0;
@@ -213,6 +243,49 @@
                 Math.round(loanAmount).toLocaleString('fr-FR') + ' €';
             document.getElementById('monthlyPayment').textContent = 
                 'Mensualité estimée : ' + Math.round(maxMonthlyPayment).toLocaleString('fr-FR') + ' €';
+        }
+
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Ajout du titre
+            doc.setFontSize(22);
+            doc.setTextColor(0, 102, 204);
+            doc.text("Simulation de prêt immobilier", 20, 20);
+
+            // Informations saisies
+            doc.setFontSize(12);
+            doc.setTextColor(29, 29, 31);
+            doc.text("Informations saisies :", 20, 40);
+            
+            const income = document.getElementById('income').value;
+            const expenses = document.getElementById('expenses').value;
+            const duration = document.getElementById('duration').value;
+            const rate = document.getElementById('rate').value;
+
+            doc.text(`Revenus mensuels : ${income} €`, 20, 50);
+            doc.text(`Charges mensuelles : ${expenses} €`, 20, 60);
+            doc.text(`Durée du prêt : ${duration} ans`, 20, 70);
+            doc.text(`Taux d'intérêt : ${rate}%`, 20, 80);
+
+            // Résultats
+            doc.text("Résultats de la simulation :", 20, 100);
+            doc.setTextColor(0, 102, 204);
+            doc.setFontSize(16);
+            doc.text(document.getElementById('loanAmount').textContent, 20, 110);
+            doc.setTextColor(29, 29, 31);
+            doc.setFontSize(12);
+            doc.text(document.getElementById('monthlyPayment').textContent, 20, 120);
+
+            // Note de bas de page
+            doc.setFontSize(10);
+            doc.setTextColor(134, 134, 139);
+            doc.text("Cette simulation est donnée à titre indicatif.", 20, 270);
+            doc.text("Pour un projet précis, consultez votre conseiller.", 20, 280);
+
+            // Sauvegarde du PDF
+            doc.save('simulation-pret.pdf');
         }
     </script>
 </body>
