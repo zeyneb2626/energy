@@ -2,239 +2,42 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Luly Homes</title>
-  <style>
-    * { 
-      box-sizing: border-box; 
-      margin: 0; 
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Satoshi', sans-serif;
-      line-height: 1.5;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .footer {
-      background-color: #1a1a1a;
-      color: #ffffff;
-      padding: 4rem 2rem;
-      margin-top: auto;
-    }
-
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 4rem;
-      margin-bottom: 4rem;
-    }
-
-    .footer-text {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      color: #e5e5e5;
-      margin-bottom: 2rem;
-    }
-
-    .footer-contact {
-      color: #e5e5e5;
-      margin-bottom: 2rem;
-    }
-
-    .footer-contact p {
-      margin-bottom: 0.5rem;
-      font-size: 1.2rem;
-    }
-
-    .footer-contact a {
-      color: #B5A69C;
-      text-decoration: none;
-      transition: color 0.3s ease;
-      font-size: 1.2rem;
-    }
-
-    .footer-contact a:hover {
-      color: #ffffff;
-    }
-
-    .footer-social {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .social-icon {
-      width: 45px;
-      height: 45px;
-      background: #B5A69C;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-    }
-
-    .social-icon:hover {
-      transform: translateY(-3px);
-      background: #9a8c82;
-    }
-
-    .social-icon svg {
-      width: 24px;
-      height: 24px;
-      color: #1a1a1a;
-    }
-
-    .cta-section {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .cta-title {
-      font-size: 2rem;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-      line-height: 1.2;
-    }
-
-    .cta-text {
-      font-size: 1.1rem;
-      color: #e5e5e5;
-      margin-bottom: 2rem;
-    }
-
-    .cta-button {
-      display: inline-block;
-      background-color: #B5A69C;
-      color: #1a1a1a;
-      padding: 1rem 2rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1.1rem;
-      transition: all 0.3s ease;
-      text-align: center;
-      max-width: 300px;
-    }
-
-    .cta-button:hover {
-      background-color: #ffffff;
-      transform: translateY(-2px);
-    }
-
-    .footer-bottom {
-      padding-top: 2rem;
-      border-top: 1px solid #333;
-      text-align: center;
-    }
-
-    .footer-logo {
-      width: 100px;
-      height: auto;
-      margin-bottom: 1.5rem;
-    }
-
-    .footer-copyright {
-      color: #9BA1A9;
-      font-size: 0.9rem;
-    }
-
-    @media (max-width: 768px) {
-      .footer {
-        padding: 3rem 1.5rem;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-      }
-
-      .footer-text {
-        font-size: 0.95rem;
-        text-align: center;
-      }
-
-      .footer-contact {
-        text-align: center;
-      }
-
-      .footer-contact p, .footer-contact a {
-        font-size: 1.3rem;
-      }
-
-      .footer-social {
-        justify-content: center;
-      }
-
-      .cta-button {
-        margin: 0 auto;
-      }
-
-      .cta-title {
-        font-size: 1.75rem;
-        text-align: center;
-      }
-
-      .cta-text {
-        text-align: center;
-      }
-    }
-  </style>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Configuration Modern'home</title>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <!-- Le reste du head reste inchangé -->
 </head>
 <body>
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-grid">
-        <div>
-          <div class="footer-text">
-            Merci de votre visite sur notre site. Luly Homes, votre constructeur de maisons à ossature métallique en Guadeloupe, s'engage à vous accompagner dans la réalisation de votre projet de construction. N'hésitez pas à nous contacter pour en savoir plus sur nos solutions innovantes.
+  <!-- Le début du body reste inchangé -->
+  <div id="configurator">
+    <div class="viewer-card">
+      <model-viewer
+        id="mv"
+        src="MODERNHOME12.glb"
+        alt="Maison Modern'home"
+        exposure="1"
+        shadow-intensity="1"
+        shadow-softness="0.5"
+        environment-image="neutral"
+        camera-controls
+        auto-rotate
+        rotation-per-second="30deg"
+        min-camera-orbit="-Infinity 0deg auto"
+        max-camera-orbit="Infinity 90deg auto"
+        camera-target="0m 1m 0m"
+        interaction-prompt="none"
+        ar
+        ar-modes="webxr scene-viewer quick-look"
+        ar-scale="fixed"
+        style="background-color: #f5f5f5;">
+          <div class="progress-bar hide" slot="progress-bar">
+            <div class="update-bar"></div>
           </div>
-          
-          <div class="footer-contact">
-            <p>Agence : Jabrun, Baie-Mahault, Guadeloupe</p>
-            <p>Email: <a href="mailto:hello@luly-homes.com">hello@luly-homes.com</a></p>
-          </div>
-
-          <div class="footer-social">
-            <a href="https://facebook.com" class="social-icon" aria-label="Facebook">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-              </svg>
-            </a>
-            <a href="https://instagram.com" class="social-icon" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <div class="cta-section">
-          <h2 class="cta-title">Prenez rendez-vous</h2>
-          <p class="cta-text">Réservez un rendez-vous pour discuter avec un de nos experts de votre projet de construction.</p>
-          <a href="https://calendly.com/lulyhomes/30min" class="cta-button">Réserver un rendez-vous</a>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <img src="https://cdn.prod.website-files.com/6790a2bd4da09d1d111023d8/67bd87570c2addfcc390e59a_Luly%20Logo%20Finalise%CC%81_LULY%20PUCE%203D%20MARRON.png" alt="Luly Homes Logo" class="footer-logo">
-        <div class="footer-copyright">
-          © 2025 Luly Homes. Tous droits réservés.
-        </div>
-      </div>
+      </model-viewer>
+      
+      <!-- Le reste du code reste inchangé -->
     </div>
-  </footer>
+  </div>
+  <!-- Le reste du body reste inchangé -->
 </body>
 </html>
